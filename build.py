@@ -96,6 +96,28 @@ CLIPS = [
         "ig_url": "https://www.youtube.com/watch?v=eyOeZz_e22Y",
         "tags": ["France", "student protests", "Paris", "tear gas", "education", "Macron"],
     },
+    {
+        "slug": "b1-bombers-fairford-iran-threat",
+        "title": "US Pulls B-1 Bombers From UK Base Over Iran Threat",
+        "hook": "\u201cThey didn't fly out by accident\u2026 there was a threat.\u201d",
+        "description": ("Washington pulled about a dozen B-1 bombers from RAF Fairford in England over the "
+                        "weekend after intelligence pointed to an Iran-linked threat against the base. The move "
+                        "followed the September 27 arrest of five British men near the base over a suspected "
+                        "terror plot \u2014 with a seventh arrest in London on Tuesday \u2014 and the UK prime "
+                        "minister cited \u2018strong indications\u2019 of Iranian involvement, which Tehran denies. "
+                        "President Trump confirmed the bombers \u2018didn't fly out by accident,\u2019 contradicting "
+                        "Secretary of State Marco Rubio, who had called it a \u2018regular rotation.\u2019 Vice "
+                        "President JD Vance said it was done \u2018out of an abundance of caution.\u2019 Fairford is "
+                        "the only European airfield for US heavy bombers and was used in this year's strikes on Iran."),
+        "src_file": "b1_bombers_fairford_gns.mp4",
+        "duration_s": 56,
+        "duration_iso": "PT56S",
+        "aspect": "16:9",
+        "upload_date": "2026-10-06",
+        "source": "U.S. Air Force via DVIDS (public domain file footage)",
+        "ig_url": "https://www.dvidshub.net/video/530964/b-1-take-off",
+        "tags": ["B-1 bomber", "Iran", "Trump", "RAF Fairford", "US military", "UK"],
+    },
 ]
 
 CSS = """*{margin:0;padding:0;box-sizing:border-box}
@@ -149,6 +171,18 @@ details.transcript .tbody{margin-top:12px}
 details.transcript .tbody p{color:#cfd6ea;font-size:.93rem;margin:0 0 12px}
 details.transcript .tbody p:last-child{margin-bottom:0}
 .ai-note{max-width:700px;margin:10px auto 0;color:var(--muted);font-size:.78rem;display:flex;align-items:center;gap:6px}
+.ts{background:#1a2242;border:1px solid #2a3568;color:#8fb4ff;border-radius:12px;padding:1px 8px;font-size:.72rem;font-family:monospace;cursor:pointer;margin-right:8px;white-space:nowrap}
+.ts:hover{border-color:var(--accent);color:#fff}
+.prevnext{max-width:700px;margin:30px auto 0;display:flex;justify-content:space-between;gap:12px}
+.prevnext a{background:var(--card);border:1px solid #232c52;border-radius:12px;padding:12px 16px;text-decoration:none;flex:1;max-width:48%}
+.prevnext a:hover{border-color:var(--accent)}
+.prevnext .k{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:1px}
+.prevnext .t{font-weight:700;font-size:.92rem;margin-top:4px;line-height:1.35}
+.prevnext .next{text-align:right}
+.taglist{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 60px}
+.taglist a{background:var(--card);border:1px solid #232c52;border-radius:20px;padding:8px 18px;text-decoration:none;font-size:.9rem}
+.taglist a:hover{border-color:var(--accent)}
+.taglist .n{color:var(--muted);font-size:.78rem;margin-left:6px}
 .src{max-width:700px;margin:22px auto 0;color:var(--muted);font-size:.85rem}
 .src a{color:var(--muted)}
 .share{max-width:700px;margin:26px auto 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -238,11 +272,12 @@ HEADER = f"""
 FOOTER = f"""
 <footer class="site"><div class="wrap">
 <span>© {date.today().year} {BRAND} — {TAGLINE}.</span>
-<span><a href="/feed.xml">RSS</a> · Follow <a href="{IG}" rel="noopener">@globalnewsshorts</a> on Instagram</span>
+<span><a href="/feed.xml">RSS</a> · <a href="/tags/">Tags</a> · <a href="/about/">About</a> · Follow <a href="{IG}" rel="noopener">@globalnewsshorts</a> on Instagram</span>
 </div></footer>
 <script>
 function copyLink(btn,url){{navigator.clipboard.writeText(url).then(()=>{{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);}});}}
 function copyEmbed(btn){{const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);}});}}
+function seekTo(btn){{const v=document.getElementById('clipvideo');if(!v)return;v.currentTime=parseFloat(btn.dataset.t);v.play();v.scrollIntoView({{behavior:'smooth',block:'center'}});}}
 </script>
 </body>
 </html>
@@ -255,9 +290,10 @@ def fmt_dur(s):
 
 def clip_card(c):
     poster = f"/posters/{c['slug']}.jpg"
+    ar = c.get("aspect", "9:16").replace(":", "/")
     return f"""
 <a class="card" href="/clips/{c['slug']}/">
-<div class="thumb"><img src="{poster}" alt="{esc(c['title'])}" loading="lazy">
+<div class="thumb" style="aspect-ratio:{ar}"><img src="{poster}" alt="{esc(c['title'])}" loading="lazy">
 <div class="play"><span>{PLAY_SVG}</span></div>
 <span class="badge">{fmt_dur(c['duration_s'])}</span></div>
 <div class="body"><h2>{esc(c['title'])}</h2>
@@ -300,8 +336,8 @@ def build():
     for c in CLIPS:
         cues = _tx.get(c["slug"])
         if cues:
-            c["cues"] = [x["text"] for x in cues]
-            c["transcript"] = " ".join(c["cues"])
+            c["cues"] = [{"t": x["start"], "text": x["text"]} for x in cues]
+            c["transcript"] = " ".join(x["text"] for x in c["cues"])
             c["cue_count"] = len(cues)
 
     # ---- index ----
@@ -352,19 +388,43 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
         poster_url = f"{SITE}/posters/{c['slug']}.jpg"
         qtitle = quote(c["title"])
         qurl = quote(page_url, safe="")
+        ar = c.get("aspect", "9:16")
+        ar_css = ar.replace(":", "/")
+        vw, vh = (1280, 720) if ar == "16:9" else (720, 1280)
+        pmax = "720px" if ar == "16:9" else "430px"
         tags = "".join(
             f'<a href="/tags/{tag_slug(t)}/">{esc(t)}</a>' for t in c["tags"])
-        watch_label = "Watch on YouTube" if "youtube.com" in c["ig_url"] or "youtu.be" in c["ig_url"] else "Watch on Instagram"
+        _u = c["ig_url"]
+        watch_label = ("Watch on YouTube" if ("youtube.com" in _u or "youtu.be" in _u)
+                       else "Watch on DVIDS" if "dvidshub.net" in _u
+                       else "Watch on Instagram")
         related = [o for o in CLIPS if o["slug"] != c["slug"]]
         related.sort(key=lambda o: (-len(set(o["tags"]) & set(c["tags"])), o["slug"]))
         rel_html = "".join(clip_card(o) for o in related[:4])
         rel_section = (f"""
 <section class="related"><h2>Related clips</h2><div class="grid">{rel_html}</div></section>"""
                        if rel_html else "")
+        idx = CLIPS.index(c)
+        prev_c = CLIPS[idx - 1] if idx > 0 else None
+        next_c = CLIPS[idx + 1] if idx < len(CLIPS) - 1 else None
+        pn = ""
+        if prev_c or next_c:
+            pn = '<nav class="prevnext">'
+            pn += (f'<a href="/clips/{prev_c["slug"]}/"><div class="k">← Previous</div>'
+                   f'<div class="t">{esc(prev_c["title"])}</div></a>'
+                   if prev_c else '<span></span>')
+            pn += (f'<a class="next" href="/clips/{next_c["slug"]}/"><div class="k">Next →</div>'
+                   f'<div class="t">{esc(next_c["title"])}</div></a>'
+                   if next_c else '')
+            pn += '</nav>'
         paras = ""
         tx_block = ""
         if c.get("cues"):
-            paras = "".join(f"<p>{esc(x)}</p>" for x in c["cues"])
+            paras = "".join(
+                f'<p><button class="ts" data-t="{x["t"]}" '
+                f'onclick="seekTo(this)" aria-label="Jump to {fmt_dur(int(x["t"]))}">'
+                f'{fmt_dur(int(x["t"]))}</button> {esc(x["text"])}</p>'
+                for x in c["cues"])
             nseg = c.get("cue_count", len(c["cues"]))
             tx_block = (f'<details class="transcript"><summary>Full transcript '
                         f'({nseg} segments)</summary><div class="tbody">{paras}</div></details>\n'
@@ -390,16 +450,16 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
                      f'<meta property="og:image" content="{poster_url}">\n'
                      f'<meta property="og:video" content="{video_url}">\n'
                      f'<meta property="og:video:type" content="video/mp4">\n'
-                     f'<meta property="og:video:width" content="720">\n'
-                     f'<meta property="og:video:height" content="1280">\n'
+                     f'<meta property="og:video:width" content="{vw}">\n'
+                     f'<meta property="og:video:height" content="{vh}">\n'
                      f'<script type="application/ld+json">{json.dumps(ld)}</script>')
                 + HEADER + f"""
 <main class="wrap clip">
 <div class="crumb"><a href="/">Clips</a> / {esc(c['title'])}</div>
 <h1>{esc(c['title'])}</h1>
 <p class="hook">{esc(c['hook'])}</p>
-<div class="player">
-<video controls playsinline preload="metadata" poster="/posters/{c['slug']}.jpg">
+<div class="player" style="max-width:{pmax}">
+<video id="clipvideo" controls playsinline preload="metadata" poster="/posters/{c['slug']}.jpg" style="aspect-ratio:{ar_css}">
 <source src="/videos/{c['slug']}.mp4" type="video/mp4">
 </video>
 </div>
@@ -420,6 +480,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
 </div>
 <div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">{watch_label}</a></div>
 {rel_section}
+{pn}
 </main>
 """ + FOOTER)
         d = os.path.join(DIST, "clips", c["slug"])
@@ -437,6 +498,8 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
 
     # ---- embed pages (noindex) ----
     for c in CLIPS:
+        ar = c.get("aspect", "9:16").replace(":", "/")
+        emax = "720px" if ar == "16/9" else "400px"
         epage = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -448,7 +511,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
 </head>
 <body>
 <div class="embedpage">
-<video controls playsinline preload="metadata" poster="/posters/{c['slug']}.jpg" src="/videos/{c['slug']}.mp4"></video>
+<video controls playsinline preload="metadata" poster="/posters/{c['slug']}.jpg" src="/videos/{c['slug']}.mp4" style="aspect-ratio:{ar};max-width:{emax}"></video>
 <div class="t">{esc(c['title'])} — <a href="/clips/{c['slug']}/" target="_blank" rel="noopener">{BRAND}</a></div>
 </div>
 </body>
@@ -520,9 +583,32 @@ as the source of truth. A few clips (heavy crowd noise, music or chanting) ship 
         os.makedirs(d)
         open(os.path.join(d, "index.html"), "w").write(tpage)
 
+    # ---- tags index ----
+    def _tag_count(slug, name):
+        return sum(1 for c in CLIPS if tag_slug(name) == slug)
+    taglinks = "".join(
+        f'<a href="/tags/{slug}/">#{esc(name)}<span class="n">{_tag_count(slug, name)}</span></a>'
+        for slug, name in sorted(tag_map.items(), key=lambda kv: kv[1].lower()))
+    tidx = (head(f"All tags | {BRAND}",
+                  "Browse Global News Shorts clips by topic tag.",
+                  f"{SITE}/tags/",
+                  '<meta property="og:type" content="website">\n'
+                  f'<meta property="og:image" content="{SITE}/logo.png">')
+            + HEADER + f"""
+<main class="wrap">
+<div class="crumb" style="margin-top:24px"><a href="/">Clips</a> / Tags</div>
+<h1 style="margin:8px 0 4px">Browse by tag</h1>
+<p style="color:var(--muted)">Every topic we clip, A–Z.</p>
+<div class="taglist">{taglinks}</div>
+</main>
+""" + FOOTER)
+    d = os.path.join(DIST, "tags")
+    open(os.path.join(d, "index.html"), "w").write(tidx)
+
     # ---- sitemap (video extension) ----
     urls = [f"""<url><loc>{SITE}/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>""",
-            f"""<url><loc>{SITE}/about/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>"""]
+            f"""<url><loc>{SITE}/about/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>""",
+            f"""<url><loc>{SITE}/tags/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>"""]
     for slug in tag_map:
         urls.append(f"""<url><loc>{SITE}/tags/{slug}/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>""")
     for c in CLIPS:

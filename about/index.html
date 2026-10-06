@@ -68,6 +68,18 @@ details.transcript .tbody{margin-top:12px}
 details.transcript .tbody p{color:#cfd6ea;font-size:.93rem;margin:0 0 12px}
 details.transcript .tbody p:last-child{margin-bottom:0}
 .ai-note{max-width:700px;margin:10px auto 0;color:var(--muted);font-size:.78rem;display:flex;align-items:center;gap:6px}
+.ts{background:#1a2242;border:1px solid #2a3568;color:#8fb4ff;border-radius:12px;padding:1px 8px;font-size:.72rem;font-family:monospace;cursor:pointer;margin-right:8px;white-space:nowrap}
+.ts:hover{border-color:var(--accent);color:#fff}
+.prevnext{max-width:700px;margin:30px auto 0;display:flex;justify-content:space-between;gap:12px}
+.prevnext a{background:var(--card);border:1px solid #232c52;border-radius:12px;padding:12px 16px;text-decoration:none;flex:1;max-width:48%}
+.prevnext a:hover{border-color:var(--accent)}
+.prevnext .k{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:1px}
+.prevnext .t{font-weight:700;font-size:.92rem;margin-top:4px;line-height:1.35}
+.prevnext .next{text-align:right}
+.taglist{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 60px}
+.taglist a{background:var(--card);border:1px solid #232c52;border-radius:20px;padding:8px 18px;text-decoration:none;font-size:.9rem}
+.taglist a:hover{border-color:var(--accent)}
+.taglist .n{color:var(--muted);font-size:.78rem;margin-left:6px}
 .src{max-width:700px;margin:22px auto 0;color:var(--muted);font-size:.85rem}
 .src a{color:var(--muted)}
 .share{max-width:700px;margin:26px auto 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -139,11 +151,12 @@ as the source of truth. A few clips (heavy crowd noise, music or chanting) ship 
 
 <footer class="site"><div class="wrap">
 <span>© 2026 Global News Shorts — USA & world, in shorts.</span>
-<span><a href="/feed.xml">RSS</a> · Follow <a href="https://www.instagram.com/globalnewsshorts/" rel="noopener">@globalnewsshorts</a> on Instagram</span>
+<span><a href="/feed.xml">RSS</a> · <a href="/tags/">Tags</a> · <a href="/about/">About</a> · Follow <a href="https://www.instagram.com/globalnewsshorts/" rel="noopener">@globalnewsshorts</a> on Instagram</span>
 </div></footer>
 <script>
 function copyLink(btn,url){navigator.clipboard.writeText(url).then(()=>{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);});}
 function copyEmbed(btn){const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);});}
+function seekTo(btn){const v=document.getElementById('clipvideo');if(!v)return;v.currentTime=parseFloat(btn.dataset.t);v.play();v.scrollIntoView({behavior:'smooth',block:'center'});}
 </script>
 </body>
 </html>
