@@ -584,10 +584,10 @@ as the source of truth. A few clips (heavy crowd noise, music or chanting) ship 
         open(os.path.join(d, "index.html"), "w").write(tpage)
 
     # ---- tags index ----
-    def _tag_count(slug, name):
-        return sum(1 for c in CLIPS if tag_slug(name) == slug)
+    def _tag_count(slug):
+        return sum(1 for c in CLIPS if slug in [tag_slug(t) for t in c["tags"]])
     taglinks = "".join(
-        f'<a href="/tags/{slug}/">#{esc(name)}<span class="n">{_tag_count(slug, name)}</span></a>'
+        f'<a href="/tags/{slug}/">#{esc(name)}<span class="n">{_tag_count(slug)}</span></a>'
         for slug, name in sorted(tag_map.items(), key=lambda kv: kv[1].lower()))
     tidx = (head(f"All tags | {BRAND}",
                   "Browse Global News Shorts clips by topic tag.",
