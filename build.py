@@ -151,6 +151,12 @@ def esc(s):
     return html.escape(s, quote=True)
 
 
+BEACON = ("<!-- Cloudflare Web Analytics -->"
+          "<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
+          'data-cf-beacon=\'{"token": "859afe99778f4d5b9554a9b5c7c84bb8"}\'></script>'
+          "<!-- End Cloudflare Web Analytics -->")
+
+
 def head(title, desc, canonical, extra=""):
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -162,6 +168,7 @@ def head(title, desc, canonical, extra=""):
 <link rel="canonical" href="{canonical}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="theme-color" content="#0b1020">
+{BEACON}
 <meta property="og:site_name" content="{BRAND}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
