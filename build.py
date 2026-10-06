@@ -194,6 +194,15 @@ def build():
 
     shutil.copy(os.path.join(SRC, "logo.png"), os.path.join(DIST, "logo.png"))
 
+    # full transcripts from faster-whisper base.en (src/transcripts.json)
+    _tx_path = os.path.join(SRC, "transcripts.json")
+    _tx = json.load(open(_tx_path)) if os.path.exists(_tx_path) else {}
+    for c in CLIPS:
+        cues = _tx.get(c["slug"])
+        if cues:
+            c["transcript"] = " ".join(x["text"] for x in cues)
+            c["cue_count"] = len(cues)
+
     # ---- index ----
     cards = []
     for c in CLIPS:
@@ -270,7 +279,7 @@ def build():
 </div>
 <div class="desc"><p>{esc(c['description'])}</p>
 <div class="tags">{tags}</div></div>
-<details class="transcript"><summary>Transcript</summary><p>{esc(c['transcript'])}</p></details>
+<details class="transcript"><summary>Full transcript ({c.get('cue_count', '?')} segments)</summary><p>{esc(c['transcript'])}</p></details>
 <div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">Watch on Instagram</a></div>
 </main>
 """ + FOOTER)
