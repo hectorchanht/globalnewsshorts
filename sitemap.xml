@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+ xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://globalnewsshorts.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>https://globalnewsshorts.com/clips/fauci-pleads-the-fifth/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
+<video:video>
+<video:thumbnail_loc>https://globalnewsshorts.com/posters/fauci-pleads-the-fifth.jpg</video:thumbnail_loc>
+<video:title>Fauci Pleads the Fifth</video:title>
+<video:description>Sen. Josh Hawley grills Dr. Fauci in a Senate hearing — asking what day of the week it is, what color tie he&#x27;s wearing — and gets the Fifth Amendment every time. 111 invocations, zero answers.</video:description>
+<video:content_loc>https://globalnewsshorts.com/videos/fauci-pleads-the-fifth.mp4</video:content_loc>
+<video:duration>107</video:duration>
+<video:publication_date>2026-10-06</video:publication_date>
+<video:family_friendly>yes</video:family_friendly>
+<video:live>no</video:live>
+</video:video></url>
+<url><loc>https://globalnewsshorts.com/clips/hawley-grills-fauci/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
+<video:video>
+<video:thumbnail_loc>https://globalnewsshorts.com/posters/hawley-grills-fauci.jpg</video:thumbnail_loc>
+<video:title>Hawley Grills Fauci on 111 Fifth Amendment Invocations</video:title>
+<video:description>Sen. Hawley explains why he asked Dr. Fauci about his tie and the carpet: to test the good faith of 111 Fifth Amendment invocations — including questions with no fear of prosecution. “That is an abuse… there&#x27;s no privilege for any of that.”</video:description>
+<video:content_loc>https://globalnewsshorts.com/videos/hawley-grills-fauci.mp4</video:content_loc>
+<video:duration>43</video:duration>
+<video:publication_date>2026-10-06</video:publication_date>
+<video:family_friendly>yes</video:family_friendly>
+<video:live>no</video:live>
+</video:video></url>
+</urlset>
