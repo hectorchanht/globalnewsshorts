@@ -96,8 +96,8 @@ nav.links a:hover{color:var(--ink)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;padding:28px 0 60px}
 .card{background:var(--card);border:1px solid #232c52;border-radius:14px;overflow:hidden;text-decoration:none;transition:transform .15s,border-color .15s}
 .card:hover{transform:translateY(-3px);border-color:var(--accent)}
-.thumb{position:relative;aspect-ratio:9/12;max-height:380px;overflow:hidden;background:#000}
-.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb{position:relative;aspect-ratio:9/16;overflow:hidden;background:#000}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 .play span{width:64px;height:64px;border-radius:50%;background:rgba(230,57,70,.92);display:flex;align-items:center;justify-content:center}
 .play svg{width:26px;height:26px;fill:#fff;margin-left:3px}
@@ -124,7 +124,9 @@ footer.site a:hover{color:var(--ink)}
 .tags span{background:#1a2242;border:1px solid #2a3568;border-radius:20px;padding:4px 12px;font-size:.78rem;color:var(--muted)}
 details.transcript{max-width:700px;margin:22px auto 0;background:var(--card);border:1px solid #232c52;border-radius:12px;padding:16px 18px}
 details.transcript summary{cursor:pointer;font-weight:700}
-details.transcript p{white-space:pre-line;color:#cfd6ea;font-size:.93rem;margin-top:12px}
+details.transcript .tbody{margin-top:12px}
+details.transcript .tbody p{color:#cfd6ea;font-size:.93rem;margin:0 0 12px}
+details.transcript .tbody p:last-child{margin-bottom:0}
 .src{max-width:700px;margin:22px auto 0;color:var(--muted);font-size:.85rem}
 .src a{color:var(--muted)}
 .more{padding:10px 0 70px}
@@ -150,7 +152,7 @@ def head(title, desc, canonical, extra=""):
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canonical}">
-<link rel="icon" type="image/png" href="/logo.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="theme-color" content="#0b1020">
 <meta property="og:site_name" content="{BRAND}">
 <meta property="og:title" content="{esc(title)}">
@@ -193,6 +195,7 @@ def build():
     os.makedirs(os.path.join(DIST, "posters"))
 
     shutil.copy(os.path.join(SRC, "logo.png"), os.path.join(DIST, "logo.png"))
+    shutil.copy(os.path.join(SRC, "favicon.svg"), os.path.join(DIST, "favicon.svg"))
 
     # full transcripts from faster-whisper base.en (src/transcripts.json)
     _tx_path = os.path.join(SRC, "transcripts.json")
@@ -200,7 +203,8 @@ def build():
     for c in CLIPS:
         cues = _tx.get(c["slug"])
         if cues:
-            c["transcript"] = " ".join(x["text"] for x in cues)
+            c["cues"] = [x["text"] for x in cues]
+            c["transcript"] = " ".join(c["cues"])
             c["cue_count"] = len(cues)
 
     # ---- index ----
@@ -243,6 +247,7 @@ def build():
         video_url = f"{SITE}/videos/{c['slug']}.mp4"
         poster_url = f"{SITE}/posters/{c['slug']}.jpg"
         tags = "".join(f"<span>{esc(t)}</span>" for t in c["tags"])
+        paras = "".join(f"<p>{esc(x)}</p>" for x in c.get("cues", [c["transcript"]]))
         ld = {
             "@context": "https://schema.org",
             "@type": "VideoObject",
@@ -279,7 +284,7 @@ def build():
 </div>
 <div class="desc"><p>{esc(c['description'])}</p>
 <div class="tags">{tags}</div></div>
-<details class="transcript"><summary>Full transcript ({c.get('cue_count', '?')} segments)</summary><p>{esc(c['transcript'])}</p></details>
+<details class="transcript"><summary>Full transcript ({c.get('cue_count', '?')} segments)</summary><div class="tbody">{paras}</div></details>
 <div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">Watch on Instagram</a></div>
 </main>
 """ + FOOTER)
