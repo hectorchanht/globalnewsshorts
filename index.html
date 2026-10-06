@@ -76,6 +76,21 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .share a,.share button{display:inline-flex;align-items:center;gap:7px;background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:20px;padding:7px 14px;font-size:.83rem;text-decoration:none;cursor:pointer;font-family:inherit}
 .share a:hover,.share button:hover{border-color:var(--accent)}
 .share svg{width:15px;height:15px;fill:currentColor}
+.embed-box{max-width:700px;margin:14px auto 0;background:#10162e;border:1px solid #232c52;border-radius:12px;padding:14px 16px;display:none}
+.embed-box.open{display:block}
+.embed-box textarea{width:100%;background:#0b1020;color:#cfd6ea;border:1px solid #2a3568;border-radius:8px;padding:10px;font-family:monospace;font-size:.78rem;resize:vertical;min-height:64px}
+.embed-box .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.embed-box .row strong{font-size:.9rem}
+.embed-box .row button{background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:16px;padding:5px 12px;font-size:.78rem;cursor:pointer;font-family:inherit}
+.searchbar{max-width:520px;margin:26px auto 0;display:flex;gap:10px}
+.searchbar input{flex:1;background:#10162e;border:1px solid #2a3568;border-radius:24px;padding:12px 20px;color:var(--ink);font-size:.95rem;font-family:inherit;outline:none}
+.searchbar input:focus{border-color:var(--accent)}
+.searchbar input::placeholder{color:var(--muted)}
+#search-meta{color:var(--muted);font-size:.85rem;margin:14px 0 0;min-height:1.4em}
+.embedpage{margin:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:12px}
+.embedpage video{width:100%;max-width:400px;aspect-ratio:9/16;background:#000;border-radius:8px}
+.embedpage .t{color:#9aa3bd;font-size:.8rem;margin-top:10px;text-align:center}
+.embedpage .t a{color:#cfd6ea}
 .more{padding:10px 0 70px}
 .more h2{font-size:1.3rem;margin-bottom:16px}
 .about{padding:40px 0 70px;max-width:700px}
@@ -106,8 +121,10 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 <div class="kicker">Global News Shorts</div>
 <h1>USA &amp; world, in shorts.</h1>
 <p>The important stuff, daily — short clips from the hearings, speeches and moments that matter.</p>
+<div class="searchbar"><input id="q" type="search" placeholder="Search clips, topics, transcripts…" aria-label="Search clips" autocomplete="off"></div>
+<p id="search-meta"></p>
 </section>
-<section class="grid">
+<section class="grid" id="clipgrid">
 <a class="card" href="/clips/fauci-pleads-the-fifth/">
 <div class="thumb"><img src="/posters/fauci-pleads-the-fifth.jpg" alt="Fauci Pleads the Fifth" loading="lazy">
 <div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
@@ -121,8 +138,30 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 <span class="badge">0:43</span></div>
 <div class="body"><h2>Hawley Grills Fauci on 111 Fifth Amendment Invocations</h2>
 <p class="hook">“He looked very carefully at the carpet.”</p>
+<p class="meta">2026-10-06</p></div></a>
+<a class="card" href="/clips/france-student-protests-tear-gas/">
+<div class="thumb"><img src="/posters/france-student-protests-tear-gas.jpg" alt="France Student Protests: Tear Gas in Paris as Hundreds of Thousands March" loading="lazy">
+<div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
+<span class="badge">1:41</span></div>
+<div class="body"><h2>France Student Protests: Tear Gas in Paris as Hundreds of Thousands March</h2>
+<p class="hook">“They don&#x27;t really care about us” — students, teachers and parents flood the streets of Paris.</p>
 <p class="meta">2026-10-06</p></div></a></section>
 </main>
+<script>
+let IDX=null;
+async function ensureIdx(){if(!IDX){IDX=await (await fetch('/search-index.json')).json();}return IDX;}
+document.getElementById('q').addEventListener('input',async e=>{
+const q=e.target.value.trim().toLowerCase();
+const grid=document.getElementById('clipgrid');const meta=document.getElementById('search-meta');
+if(q.length<2){grid.innerHTML=window._allCards;meta.textContent='';return;}
+const idx=await ensureIdx();
+const hits=idx.filter(c=>(c.title+' '+c.hook+' '+c.desc+' '+c.tags+' '+c.text).toLowerCase().includes(q));
+meta.textContent=hits.length?hits.length+' result'+(hits.length>1?'s':'')+' for “'+e.target.value.trim()+'”':'No clips match “'+e.target.value.trim()+'”.';
+grid.innerHTML=hits.map(window._card).join('');
+});
+window._allCards=document.getElementById('clipgrid').innerHTML;
+window._card=c=>`<a class="card" href="$${c.url}"><div class="thumb"><img src="$${c.poster}" alt="$${c.title}" loading="lazy"><div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div><span class="badge">$${c.dur}</span></div><div class="body"><h2>$${c.title}</h2><p class="hook">$${c.hook}</p><p class="meta">$${c.date}</p></div></a>`;
+</script>
 
 <footer class="site"><div class="wrap">
 <span>© 2026 Global News Shorts — USA & world, in shorts.</span>
@@ -130,6 +169,7 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 </div></footer>
 <script>
 function copyLink(btn,url){navigator.clipboard.writeText(url).then(()=>{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);});}
+function copyEmbed(btn){const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);});}
 </script>
 </body>
 </html>

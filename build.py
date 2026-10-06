@@ -77,6 +77,25 @@ CLIPS = [
         "ig_url": "https://www.instagram.com/reel/DbtM6fvKmxe/",
         "tags": ["Josh Hawley", "Fauci", "Fifth Amendment", "Senate hearing", "US politics"],
     },
+    {
+        "slug": "france-student-protests-tear-gas",
+        "title": "France Student Protests: Tear Gas in Paris as Hundreds of Thousands March",
+        "hook": "\u201cThey don't really care about us\u201d \u2014 students, teachers and parents flood the streets of Paris.",
+        "description": ("France's student protest wave peaks on October 6 with a national day of demonstrations: "
+                        "256,000 marchers counted by the Interior Ministry, 450,000 by organizers, up to 100,000 "
+                        "in Paris marching from R\u00e9publique to Nation. What began September 21 at a Cr\u00e9teil high "
+                        "school over teacher shortages, overcrowded classes and crumbling buildings has spread "
+                        "nationwide \u2014 24 schools burned or ransacked, 78 staff injured, over 6,500 arrested, "
+                        "mostly minors. Police fired tear gas as the Paris march ended; Prime Minister S\u00e9bastien "
+                        "Lecornu suspended classes through the week."),
+        "src_file": "france_student_protests_gns.mp4",
+        "duration_s": 101,
+        "duration_iso": "PT1M41S",
+        "upload_date": "2026-10-06",
+        "source": "News9 via YouTube",
+        "ig_url": "https://www.youtube.com/watch?v=eyOeZz_e22Y",
+        "tags": ["France", "student protests", "Paris", "tear gas", "education", "Macron"],
+    },
 ]
 
 CSS = """*{margin:0;padding:0;box-sizing:border-box}
@@ -137,6 +156,21 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .share a,.share button{display:inline-flex;align-items:center;gap:7px;background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:20px;padding:7px 14px;font-size:.83rem;text-decoration:none;cursor:pointer;font-family:inherit}
 .share a:hover,.share button:hover{border-color:var(--accent)}
 .share svg{width:15px;height:15px;fill:currentColor}
+.embed-box{max-width:700px;margin:14px auto 0;background:#10162e;border:1px solid #232c52;border-radius:12px;padding:14px 16px;display:none}
+.embed-box.open{display:block}
+.embed-box textarea{width:100%;background:#0b1020;color:#cfd6ea;border:1px solid #2a3568;border-radius:8px;padding:10px;font-family:monospace;font-size:.78rem;resize:vertical;min-height:64px}
+.embed-box .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.embed-box .row strong{font-size:.9rem}
+.embed-box .row button{background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:16px;padding:5px 12px;font-size:.78rem;cursor:pointer;font-family:inherit}
+.searchbar{max-width:520px;margin:26px auto 0;display:flex;gap:10px}
+.searchbar input{flex:1;background:#10162e;border:1px solid #2a3568;border-radius:24px;padding:12px 20px;color:var(--ink);font-size:.95rem;font-family:inherit;outline:none}
+.searchbar input:focus{border-color:var(--accent)}
+.searchbar input::placeholder{color:var(--muted)}
+#search-meta{color:var(--muted);font-size:.85rem;margin:14px 0 0;min-height:1.4em}
+.embedpage{margin:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:12px}
+.embedpage video{width:100%;max-width:400px;aspect-ratio:9/16;background:#000;border-radius:8px}
+.embedpage .t{color:#9aa3bd;font-size:.8rem;margin-top:10px;text-align:center}
+.embedpage .t a{color:#cfd6ea}
 .more{padding:10px 0 70px}
 .more h2{font-size:1.3rem;margin-bottom:16px}
 .about{padding:40px 0 70px;max-width:700px}
@@ -208,6 +242,7 @@ FOOTER = f"""
 </div></footer>
 <script>
 function copyLink(btn,url){{navigator.clipboard.writeText(url).then(()=>{{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);}});}}
+function copyEmbed(btn){{const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);}});}}
 </script>
 </body>
 </html>
@@ -252,6 +287,13 @@ def build():
     shutil.copy(os.path.join(SRC, "logo.png"), os.path.join(DIST, "logo.png"))
     shutil.copy(os.path.join(SRC, "favicon.svg"), os.path.join(DIST, "favicon.svg"))
 
+    # IndexNow key file (https://www.indexnow.org/) — optional
+    _key = None
+    _key_path = os.path.join(SRC, "indexnow.key")
+    if os.path.exists(_key_path):
+        _key = open(_key_path).read().strip()
+        open(os.path.join(DIST, _key + ".txt"), "w").write(_key)
+
     # full transcripts from faster-whisper base.en (src/transcripts.json)
     _tx_path = os.path.join(SRC, "transcripts.json")
     _tx = json.load(open(_tx_path)) if os.path.exists(_tx_path) else {}
@@ -280,9 +322,26 @@ def build():
 <div class="kicker">Global News Shorts</div>
 <h1>USA &amp; world, in shorts.</h1>
 <p>The important stuff, daily — short clips from the hearings, speeches and moments that matter.</p>
+<div class="searchbar"><input id="q" type="search" placeholder="Search clips, topics, transcripts…" aria-label="Search clips" autocomplete="off"></div>
+<p id="search-meta"></p>
 </section>
-<section class="grid">{cards}</section>
+<section class="grid" id="clipgrid">{cards}</section>
 </main>
+<script>
+let IDX=null;
+async function ensureIdx(){{if(!IDX){{IDX=await (await fetch('/search-index.json')).json();}}return IDX;}}
+document.getElementById('q').addEventListener('input',async e=>{{
+const q=e.target.value.trim().toLowerCase();
+const grid=document.getElementById('clipgrid');const meta=document.getElementById('search-meta');
+if(q.length<2){{grid.innerHTML=window._allCards;meta.textContent='';return;}}
+const idx=await ensureIdx();
+const hits=idx.filter(c=>(c.title+' '+c.hook+' '+c.desc+' '+c.tags+' '+c.text).toLowerCase().includes(q));
+meta.textContent=hits.length?hits.length+' result'+(hits.length>1?'s':'')+' for “'+e.target.value.trim()+'”':'No clips match “'+e.target.value.trim()+'”.';
+grid.innerHTML=hits.map(window._card).join('');
+}});
+window._allCards=document.getElementById('clipgrid').innerHTML;
+window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src="$${{c.poster}}" alt="$${{c.title}}" loading="lazy"><div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div><span class="badge">$${{c.dur}}</span></div><div class="body"><h2>$${{c.title}}</h2><p class="hook">$${{c.hook}}</p><p class="meta">$${{c.date}}</p></div></a>`;
+</script>
 """ + FOOTER)
     open(os.path.join(DIST, "index.html"), "w").write(index)
 
@@ -301,7 +360,14 @@ def build():
         rel_section = (f"""
 <section class="related"><h2>Related clips</h2><div class="grid">{rel_html}</div></section>"""
                        if rel_html else "")
-        paras = "".join(f"<p>{esc(x)}</p>" for x in c.get("cues", [c["transcript"]]))
+        paras = ""
+        tx_block = ""
+        if c.get("cues"):
+            paras = "".join(f"<p>{esc(x)}</p>" for x in c["cues"])
+            nseg = c.get("cue_count", len(c["cues"]))
+            tx_block = (f'<details class="transcript"><summary>Full transcript '
+                        f'({nseg} segments)</summary><div class="tbody">{paras}</div></details>\n'
+                        '<p class="ai-note">\u2726 Transcript auto-generated by AI \u2014 may contain errors.</p>')
         ld = {
             "@context": "https://schema.org",
             "@type": "VideoObject",
@@ -338,16 +404,20 @@ def build():
 </div>
 <div class="desc"><p>{esc(c['description'])}</p>
 <div class="tags">{tags}</div></div>
-<details class="transcript"><summary>Full transcript ({c.get('cue_count', '?')} segments)</summary><div class="tbody">{paras}</div></details>
-<p class="ai-note">✦ Transcript auto-generated by AI — may contain errors.</p>
+{tx_block}
 <div class="share">
 <span class="lbl">Share</span>
 <button onclick="copyLink(this,'{page_url}')" aria-label="Copy link"><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg><span class="t">Copy link</span></button>
 <a href="https://twitter.com/intent/tweet?text={qtitle}&url={qurl}" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8.1 9.2L24 22.8h-7.5l-5.9-7.6-6.7 7.6H.2l8.6-9.9L0 1.2h7.7l5.3 7 6-7zm-1.3 19.4h2L6.6 3.3H4.4l13.2 17.3z"/></svg>Post</a>
 <a href="https://www.facebook.com/sharer/sharer.php?u={qurl}" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 1-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg>Share</a>
 <a href="https://wa.me/?text={qtitle}%20{qurl}" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 0 0-9.9 18.5L.5 24l5.7-1.5A12 12 0 1 0 12 0zm5.4 16.9c-.2.7-1.3 1.3-1.8 1.4-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.6.8-.4 1.1.7 1.2 1.6 2 2.8 2.7.3.2.5.1.7-.1l.8-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .6-.2 1.1z"/></svg>Send</a>
+<button onclick="document.getElementById('embedbox').classList.toggle('open')" aria-label="Embed this clip"><svg viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg><span class="t">Embed</span></button>
 </div>
-<div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">Watch on Instagram</a></div>
+<div class="embed-box" id="embedbox">
+<div class="row"><strong>Embed this clip</strong><button onclick="copyEmbed(this)">Copy code</button></div>
+<textarea id="embedcode" readonly>&lt;iframe width="360" height="640" src="{SITE}/embed/{c['slug']}/" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+</div>
+<div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">Watch source</a></div>
 {rel_section}
 </main>
 """ + FOOTER)
@@ -363,6 +433,29 @@ def build():
         shutil.copy(src_poster, os.path.join(DIST, "posters", c["slug"] + ".jpg"))
 
     # ---- more clips section is on index already ----
+
+    # ---- embed pages (noindex) ----
+    for c in CLIPS:
+        epage = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{esc(c['title'])} | {BRAND}</title>
+<style>{CSS}</style>
+</head>
+<body>
+<div class="embedpage">
+<video controls playsinline preload="metadata" poster="/posters/{c['slug']}.jpg" src="/videos/{c['slug']}.mp4"></video>
+<div class="t">{esc(c['title'])} — <a href="/clips/{c['slug']}/" target="_blank" rel="noopener">{BRAND}</a></div>
+</div>
+</body>
+</html>
+"""
+        d = os.path.join(DIST, "embed", c["slug"])
+        os.makedirs(d)
+        open(os.path.join(d, "index.html"), "w").write(epage)
 
     # ---- 404 ----
     err = (head("Not found | " + BRAND, "Page not found.", SITE + "/404.html")
@@ -385,14 +478,14 @@ def build():
 short clips from the hearings, speeches and moments that matter, cut straight to the point.</p>
 <h2>What you'll find here</h2>
 <ul>
-<li>Short vertical video clips, each with a full transcript you can read or search.</li>
+<li>Short vertical video clips, most with a full transcript you can read or search.</li>
 <li>Clips are chosen for substance — what was actually said, not the spin around it.</li>
 <li>New clips are added as they're published on our Instagram.</li>
 </ul>
 <h2>Transcripts</h2>
-<p>Every clip page carries a full transcript auto-generated by AI. It's there so you can
+<p>Most clip pages carry a full transcript auto-generated by AI. It's there so you can
 search the words and skim the substance — but AI can mishear, so treat the video itself
-as the source of truth.</p>
+as the source of truth. A few clips (heavy crowd noise, music or chanting) ship without one.</p>
 <div class="contact">
 <strong>Tips &amp; corrections:</strong>
 <a href="mailto:hello@globalnewsshorts.com">hello@globalnewsshorts.com</a><br>
@@ -474,6 +567,20 @@ as the source of truth.</p>
            "<language>en-us</language>\n"
            + "\n".join(items) + "\n</channel>\n</rss>\n")
     open(os.path.join(DIST, "feed.xml"), "w").write(rss)
+
+    # ---- search index ----
+    sidx = [{
+        "title": c["title"],
+        "hook": c["hook"],
+        "desc": c["description"],
+        "tags": " ".join(c["tags"]),
+        "text": c.get("transcript", ""),
+        "url": f"/clips/{c['slug']}/",
+        "poster": f"/posters/{c['slug']}.jpg",
+        "dur": fmt_dur(c["duration_s"]),
+        "date": c["upload_date"],
+    } for c in CLIPS]
+    open(os.path.join(DIST, "search-index.json"), "w").write(json.dumps(sidx))
 
     open(os.path.join(DIST, "llms.txt"), "w").write(
         f"# {BRAND}\n\n> {DESC}\n\n## Clips\n\n" +

@@ -75,6 +75,21 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .share a,.share button{display:inline-flex;align-items:center;gap:7px;background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:20px;padding:7px 14px;font-size:.83rem;text-decoration:none;cursor:pointer;font-family:inherit}
 .share a:hover,.share button:hover{border-color:var(--accent)}
 .share svg{width:15px;height:15px;fill:currentColor}
+.embed-box{max-width:700px;margin:14px auto 0;background:#10162e;border:1px solid #232c52;border-radius:12px;padding:14px 16px;display:none}
+.embed-box.open{display:block}
+.embed-box textarea{width:100%;background:#0b1020;color:#cfd6ea;border:1px solid #2a3568;border-radius:8px;padding:10px;font-family:monospace;font-size:.78rem;resize:vertical;min-height:64px}
+.embed-box .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.embed-box .row strong{font-size:.9rem}
+.embed-box .row button{background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:16px;padding:5px 12px;font-size:.78rem;cursor:pointer;font-family:inherit}
+.searchbar{max-width:520px;margin:26px auto 0;display:flex;gap:10px}
+.searchbar input{flex:1;background:#10162e;border:1px solid #2a3568;border-radius:24px;padding:12px 20px;color:var(--ink);font-size:.95rem;font-family:inherit;outline:none}
+.searchbar input:focus{border-color:var(--accent)}
+.searchbar input::placeholder{color:var(--muted)}
+#search-meta{color:var(--muted);font-size:.85rem;margin:14px 0 0;min-height:1.4em}
+.embedpage{margin:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:12px}
+.embedpage video{width:100%;max-width:400px;aspect-ratio:9/16;background:#000;border-radius:8px}
+.embedpage .t{color:#9aa3bd;font-size:.8rem;margin-top:10px;text-align:center}
+.embedpage .t a{color:#cfd6ea}
 .more{padding:10px 0 70px}
 .more h2{font-size:1.3rem;margin-bottom:16px}
 .about{padding:40px 0 70px;max-width:700px}
@@ -103,7 +118,7 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 <main class="wrap">
 <div class="crumb" style="margin-top:24px"><a href="/">Clips</a> / Fauci</div>
 <h1 style="margin:8px 0 4px">#Fauci</h1>
-<p style="color:var(--muted);margin-bottom:8px">2 clips</p>
+<p style="color:var(--muted);margin-bottom:8px">3 clips</p>
 <section class="grid">
 <a class="card" href="/clips/fauci-pleads-the-fifth/">
 <div class="thumb"><img src="/posters/fauci-pleads-the-fifth.jpg" alt="Fauci Pleads the Fifth" loading="lazy">
@@ -118,6 +133,13 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 <span class="badge">0:43</span></div>
 <div class="body"><h2>Hawley Grills Fauci on 111 Fifth Amendment Invocations</h2>
 <p class="hook">“He looked very carefully at the carpet.”</p>
+<p class="meta">2026-10-06</p></div></a>
+<a class="card" href="/clips/france-student-protests-tear-gas/">
+<div class="thumb"><img src="/posters/france-student-protests-tear-gas.jpg" alt="France Student Protests: Tear Gas in Paris as Hundreds of Thousands March" loading="lazy">
+<div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
+<span class="badge">1:41</span></div>
+<div class="body"><h2>France Student Protests: Tear Gas in Paris as Hundreds of Thousands March</h2>
+<p class="hook">“They don&#x27;t really care about us” — students, teachers and parents flood the streets of Paris.</p>
 <p class="meta">2026-10-06</p></div></a></section>
 </main>
 
@@ -127,6 +149,7 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 </div></footer>
 <script>
 function copyLink(btn,url){navigator.clipboard.writeText(url).then(()=>{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);});}
+function copyEmbed(btn){const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);});}
 </script>
 </body>
 </html>

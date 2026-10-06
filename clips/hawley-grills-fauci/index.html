@@ -80,6 +80,21 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .share a,.share button{display:inline-flex;align-items:center;gap:7px;background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:20px;padding:7px 14px;font-size:.83rem;text-decoration:none;cursor:pointer;font-family:inherit}
 .share a:hover,.share button:hover{border-color:var(--accent)}
 .share svg{width:15px;height:15px;fill:currentColor}
+.embed-box{max-width:700px;margin:14px auto 0;background:#10162e;border:1px solid #232c52;border-radius:12px;padding:14px 16px;display:none}
+.embed-box.open{display:block}
+.embed-box textarea{width:100%;background:#0b1020;color:#cfd6ea;border:1px solid #2a3568;border-radius:8px;padding:10px;font-family:monospace;font-size:.78rem;resize:vertical;min-height:64px}
+.embed-box .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.embed-box .row strong{font-size:.9rem}
+.embed-box .row button{background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:16px;padding:5px 12px;font-size:.78rem;cursor:pointer;font-family:inherit}
+.searchbar{max-width:520px;margin:26px auto 0;display:flex;gap:10px}
+.searchbar input{flex:1;background:#10162e;border:1px solid #2a3568;border-radius:24px;padding:12px 20px;color:var(--ink);font-size:.95rem;font-family:inherit;outline:none}
+.searchbar input:focus{border-color:var(--accent)}
+.searchbar input::placeholder{color:var(--muted)}
+#search-meta{color:var(--muted);font-size:.85rem;margin:14px 0 0;min-height:1.4em}
+.embedpage{margin:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:12px}
+.embedpage video{width:100%;max-width:400px;aspect-ratio:9/16;background:#000;border-radius:8px}
+.embedpage .t{color:#9aa3bd;font-size:.8rem;margin-top:10px;text-align:center}
+.embedpage .t a{color:#cfd6ea}
 .more{padding:10px 0 70px}
 .more h2{font-size:1.3rem;margin-bottom:16px}
 .about{padding:40px 0 70px;max-width:700px}
@@ -124,8 +139,13 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 <a href="https://twitter.com/intent/tweet?text=Hawley%20Grills%20Fauci%20on%20111%20Fifth%20Amendment%20Invocations&url=https%3A%2F%2Fglobalnewsshorts.com%2Fclips%2Fhawley-grills-fauci%2F" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8.1 9.2L24 22.8h-7.5l-5.9-7.6-6.7 7.6H.2l8.6-9.9L0 1.2h7.7l5.3 7 6-7zm-1.3 19.4h2L6.6 3.3H4.4l13.2 17.3z"/></svg>Post</a>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fglobalnewsshorts.com%2Fclips%2Fhawley-grills-fauci%2F" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 1-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg>Share</a>
 <a href="https://wa.me/?text=Hawley%20Grills%20Fauci%20on%20111%20Fifth%20Amendment%20Invocations%20https%3A%2F%2Fglobalnewsshorts.com%2Fclips%2Fhawley-grills-fauci%2F" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 0 0-9.9 18.5L.5 24l5.7-1.5A12 12 0 1 0 12 0zm5.4 16.9c-.2.7-1.3 1.3-1.8 1.4-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.6.8-.4 1.1.7 1.2 1.6 2 2.8 2.7.3.2.5.1.7-.1l.8-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .6-.2 1.1z"/></svg>Send</a>
+<button onclick="document.getElementById('embedbox').classList.toggle('open')" aria-label="Embed this clip"><svg viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg><span class="t">Embed</span></button>
 </div>
-<div class="src">via @senatorhawley on Instagram · <a href="https://www.instagram.com/reel/DbtM6fvKmxe/" rel="noopener">Watch on Instagram</a></div>
+<div class="embed-box" id="embedbox">
+<div class="row"><strong>Embed this clip</strong><button onclick="copyEmbed(this)">Copy code</button></div>
+<textarea id="embedcode" readonly>&lt;iframe width="360" height="640" src="https://globalnewsshorts.com/embed/hawley-grills-fauci/" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+</div>
+<div class="src">via @senatorhawley on Instagram · <a href="https://www.instagram.com/reel/DbtM6fvKmxe/" rel="noopener">Watch source</a></div>
 
 <section class="related"><h2>Related clips</h2><div class="grid">
 <a class="card" href="/clips/fauci-pleads-the-fifth/">
@@ -134,6 +154,13 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 <span class="badge">1:47</span></div>
 <div class="body"><h2>Fauci Pleads the Fifth</h2>
 <p class="hook">“Nothing says honesty like taking the Fifth, huh, Doc?”</p>
+<p class="meta">2026-10-06</p></div></a>
+<a class="card" href="/clips/france-student-protests-tear-gas/">
+<div class="thumb"><img src="/posters/france-student-protests-tear-gas.jpg" alt="France Student Protests: Tear Gas in Paris as Hundreds of Thousands March" loading="lazy">
+<div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
+<span class="badge">1:41</span></div>
+<div class="body"><h2>France Student Protests: Tear Gas in Paris as Hundreds of Thousands March</h2>
+<p class="hook">“They don&#x27;t really care about us” — students, teachers and parents flood the streets of Paris.</p>
 <p class="meta">2026-10-06</p></div></a></div></section>
 </main>
 
@@ -143,6 +170,7 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 </div></footer>
 <script>
 function copyLink(btn,url){navigator.clipboard.writeText(url).then(()=>{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);});}
+function copyEmbed(btn){const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);});}
 </script>
 </body>
 </html>
