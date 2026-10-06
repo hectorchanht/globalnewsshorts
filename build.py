@@ -354,6 +354,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
         qurl = quote(page_url, safe="")
         tags = "".join(
             f'<a href="/tags/{tag_slug(t)}/">{esc(t)}</a>' for t in c["tags"])
+        watch_label = "Watch on YouTube" if "youtube.com" in c["ig_url"] or "youtu.be" in c["ig_url"] else "Watch on Instagram"
         related = [o for o in CLIPS if o["slug"] != c["slug"]]
         related.sort(key=lambda o: (-len(set(o["tags"]) & set(c["tags"])), o["slug"]))
         rel_html = "".join(clip_card(o) for o in related[:4])
