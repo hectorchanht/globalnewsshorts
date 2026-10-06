@@ -418,7 +418,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
 <div class="row"><strong>Embed this clip</strong><button onclick="copyEmbed(this)">Copy code</button></div>
 <textarea id="embedcode" readonly>&lt;iframe width="360" height="640" src="{SITE}/embed/{c['slug']}/" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
 </div>
-<div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">Watch source</a></div>
+<div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">{watch_label}</a></div>
 {rel_section}
 </main>
 """ + FOOTER)
