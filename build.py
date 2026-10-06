@@ -139,6 +139,18 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .share svg{width:15px;height:15px;fill:currentColor}
 .more{padding:10px 0 70px}
 .more h2{font-size:1.3rem;margin-bottom:16px}
+.about{padding:40px 0 70px;max-width:700px}
+.about h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:10px 0 18px}
+.about p{color:#cfd6ea;margin-bottom:16px}
+.about h2{font-size:1.25rem;margin:28px 0 12px}
+.about ul{color:#cfd6ea;margin:0 0 16px 20px}
+.about li{margin-bottom:8px}
+.about .contact{background:var(--card);border:1px solid #232c52;border-radius:12px;padding:18px 20px;margin-top:24px}
+.about .contact a{color:#fff;font-weight:700}
+.related{padding:8px 0 70px}
+.related h2{font-size:1.3rem;margin-bottom:16px}
+.tags a{background:#1a2242;border:1px solid #2a3568;border-radius:20px;padding:4px 12px;font-size:.78rem;color:var(--muted);text-decoration:none}
+.tags a:hover{border-color:var(--accent);color:var(--ink)}
 .err{text-align:center;padding:90px 20px}
 .err h1{font-size:3rem;margin-bottom:10px}
 """
@@ -185,7 +197,7 @@ def head(title, desc, canonical, extra=""):
 HEADER = f"""
 <header class="top"><div class="wrap">
 <a class="brand" href="/"><img src="/logo.png" alt="Global News Shorts logo"><span>Global News Shorts</span></a>
-<nav class="links"><a href="/">Clips</a><a href="{IG}" rel="noopener">Instagram</a></nav>
+<nav class="links"><a href="/">Clips</a><a href="/about/">About</a><a href="{IG}" rel="noopener">Instagram</a></nav>
 </div></header>
 """
 
@@ -204,6 +216,30 @@ function copyLink(btn,url){{navigator.clipboard.writeText(url).then(()=>{{const 
 
 def fmt_dur(s):
     return f"{s // 60}:{s % 60:02d}"
+
+
+def clip_card(c):
+    poster = f"/posters/{c['slug']}.jpg"
+    return f"""
+<a class="card" href="/clips/{c['slug']}/">
+<div class="thumb"><img src="{poster}" alt="{esc(c['title'])}" loading="lazy">
+<div class="play"><span>{PLAY_SVG}</span></div>
+<span class="badge">{fmt_dur(c['duration_s'])}</span></div>
+<div class="body"><h2>{esc(c['title'])}</h2>
+<p class="hook">{esc(c['hook'])}</p>
+<p class="meta">{c['upload_date']}</p></div></a>"""
+
+
+def tag_slug(t):
+    return t.lower().replace(" ", "-")
+
+
+def all_tags():
+    seen = {}
+    for c in CLIPS:
+        for t in c["tags"]:
+            seen.setdefault(tag_slug(t), t)
+    return seen
 
 
 def build():
@@ -227,17 +263,7 @@ def build():
             c["cue_count"] = len(cues)
 
     # ---- index ----
-    cards = []
-    for c in CLIPS:
-        poster = f"/posters/{c['slug']}.jpg"
-        cards.append(f"""
-<a class="card" href="/clips/{c['slug']}/">
-<div class="thumb"><img src="{poster}" alt="{esc(c['title'])}" loading="lazy">
-<div class="play"><span>{PLAY_SVG}</span></div>
-<span class="badge">{fmt_dur(c['duration_s'])}</span></div>
-<div class="body"><h2>{esc(c['title'])}</h2>
-<p class="hook">{esc(c['hook'])}</p>
-<p class="meta">{c['upload_date']}</p></div></a>""")
+    cards = "".join(clip_card(c) for c in CLIPS)
 
     site_ld = json.dumps({
         "@context": "https://schema.org", "@type": "WebSite",
@@ -255,7 +281,7 @@ def build():
 <h1>USA &amp; world, in shorts.</h1>
 <p>The important stuff, daily — short clips from the hearings, speeches and moments that matter.</p>
 </section>
-<section class="grid">{''.join(cards)}</section>
+<section class="grid">{cards}</section>
 </main>
 """ + FOOTER)
     open(os.path.join(DIST, "index.html"), "w").write(index)
@@ -267,7 +293,14 @@ def build():
         poster_url = f"{SITE}/posters/{c['slug']}.jpg"
         qtitle = quote(c["title"])
         qurl = quote(page_url, safe="")
-        tags = "".join(f"<span>{esc(t)}</span>" for t in c["tags"])
+        tags = "".join(
+            f'<a href="/tags/{tag_slug(t)}/">{esc(t)}</a>' for t in c["tags"])
+        related = [o for o in CLIPS if o["slug"] != c["slug"]]
+        related.sort(key=lambda o: (-len(set(o["tags"]) & set(c["tags"])), o["slug"]))
+        rel_html = "".join(clip_card(o) for o in related[:4])
+        rel_section = (f"""
+<section class="related"><h2>Related clips</h2><div class="grid">{rel_html}</div></section>"""
+                       if rel_html else "")
         paras = "".join(f"<p>{esc(x)}</p>" for x in c.get("cues", [c["transcript"]]))
         ld = {
             "@context": "https://schema.org",
@@ -315,6 +348,7 @@ def build():
 <a href="https://wa.me/?text={qtitle}%20{qurl}" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 0 0-9.9 18.5L.5 24l5.7-1.5A12 12 0 1 0 12 0zm5.4 16.9c-.2.7-1.3 1.3-1.8 1.4-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.6.8-.4 1.1.7 1.2 1.6 2 2.8 2.7.3.2.5.1.7-.1l.8-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .6-.2 1.1z"/></svg>Send</a>
 </div>
 <div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">Watch on Instagram</a></div>
+{rel_section}
 </main>
 """ + FOOTER)
         d = os.path.join(DIST, "clips", c["slug"])
@@ -337,8 +371,66 @@ def build():
 """ + FOOTER)
     open(os.path.join(DIST, "404.html"), "w").write(err)
 
+    # ---- about ----
+    about = (head(f"About | {BRAND}",
+                  "What Global News Shorts is: the important USA and world news, in short videos — plus how to get in touch.",
+                  SITE + "/about/",
+                  '<meta property="og:type" content="website">\n'
+                  f'<meta property="og:image" content="{SITE}/logo.png">')
+               + HEADER + """
+<main class="wrap about">
+<div class="crumb"><a href="/">Home</a> / About</div>
+<h1>About Global News Shorts</h1>
+<p><strong>Global News Shorts</strong> is USA &amp; world news, in shorts. The important stuff, daily —
+short clips from the hearings, speeches and moments that matter, cut straight to the point.</p>
+<h2>What you'll find here</h2>
+<ul>
+<li>Short vertical video clips, each with a full transcript you can read or search.</li>
+<li>Clips are chosen for substance — what was actually said, not the spin around it.</li>
+<li>New clips are added as they're published on our Instagram.</li>
+</ul>
+<h2>Transcripts</h2>
+<p>Every clip page carries a full transcript auto-generated by AI. It's there so you can
+search the words and skim the substance — but AI can mishear, so treat the video itself
+as the source of truth.</p>
+<div class="contact">
+<strong>Tips &amp; corrections:</strong>
+<a href="mailto:hello@globalnewsshorts.com">hello@globalnewsshorts.com</a><br>
+<span style="color:var(--muted);font-size:.85rem">Follow <a href="https://www.instagram.com/globalnewsshorts/" rel="noopener">@globalnewsshorts</a> on Instagram for the daily clips.</span>
+</div>
+</main>
+""" + FOOTER)
+    d = os.path.join(DIST, "about")
+    os.makedirs(d)
+    open(os.path.join(d, "index.html"), "w").write(about)
+
+    # ---- tag pages ----
+    tag_map = all_tags()
+    for slug, name in tag_map.items():
+        tagged = [c for c in CLIPS if tag_slug(name) == slug]
+        cards = "".join(clip_card(c) for c in tagged)
+        tpage = (head(f"{name} clips | {BRAND}",
+                      f"Global News Shorts clips tagged {name}.",
+                      f"{SITE}/tags/{slug}/",
+                      '<meta property="og:type" content="website">\n'
+                      f'<meta property="og:image" content="{SITE}/logo.png">')
+                 + HEADER + f"""
+<main class="wrap">
+<div class="crumb" style="margin-top:24px"><a href="/">Clips</a> / {esc(name)}</div>
+<h1 style="margin:8px 0 4px">#{esc(name)}</h1>
+<p style="color:var(--muted);margin-bottom:8px">{len(tagged)} clip{'s' if len(tagged)!=1 else ''}</p>
+<section class="grid">{cards}</section>
+</main>
+""" + FOOTER)
+        d = os.path.join(DIST, "tags", slug)
+        os.makedirs(d)
+        open(os.path.join(d, "index.html"), "w").write(tpage)
+
     # ---- sitemap (video extension) ----
-    urls = [f"""<url><loc>{SITE}/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>"""]
+    urls = [f"""<url><loc>{SITE}/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>""",
+            f"""<url><loc>{SITE}/about/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>"""]
+    for slug in tag_map:
+        urls.append(f"""<url><loc>{SITE}/tags/{slug}/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>""")
     for c in CLIPS:
         urls.append(f"""<url><loc>{SITE}/clips/{c['slug']}/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
 <video:video>
