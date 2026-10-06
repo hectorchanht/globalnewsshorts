@@ -13,6 +13,7 @@
 <meta property="og:description" content="Page not found.">
 <meta property="og:url" content="https://globalnewsshorts.com/404.html">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Global News Shorts clips" href="/feed.xml">
 
 <style>*{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0b1020;--card:#141b33;--ink:#eef1f8;--muted:#9aa3bd;--accent:#e63946;--navy:#1d2a5c}
@@ -64,8 +65,14 @@ details.transcript summary{cursor:pointer;font-weight:700}
 details.transcript .tbody{margin-top:12px}
 details.transcript .tbody p{color:#cfd6ea;font-size:.93rem;margin:0 0 12px}
 details.transcript .tbody p:last-child{margin-bottom:0}
+.ai-note{max-width:700px;margin:10px auto 0;color:var(--muted);font-size:.78rem;display:flex;align-items:center;gap:6px}
 .src{max-width:700px;margin:22px auto 0;color:var(--muted);font-size:.85rem}
 .src a{color:var(--muted)}
+.share{max-width:700px;margin:26px auto 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.share .lbl{color:var(--muted);font-size:.85rem;font-weight:700}
+.share a,.share button{display:inline-flex;align-items:center;gap:7px;background:#1a2242;border:1px solid #2a3568;color:var(--ink);border-radius:20px;padding:7px 14px;font-size:.83rem;text-decoration:none;cursor:pointer;font-family:inherit}
+.share a:hover,.share button:hover{border-color:var(--accent)}
+.share svg{width:15px;height:15px;fill:currentColor}
 .more{padding:10px 0 70px}
 .more h2{font-size:1.3rem;margin-bottom:16px}
 .err{text-align:center;padding:90px 20px}
@@ -83,7 +90,10 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 
 <footer class="site"><div class="wrap">
 <span>© 2026 Global News Shorts — USA & world, in shorts.</span>
-<span>Follow <a href="https://www.instagram.com/globalnewsshorts/" rel="noopener">@globalnewsshorts</a> on Instagram</span>
+<span><a href="/feed.xml">RSS</a> · Follow <a href="https://www.instagram.com/globalnewsshorts/" rel="noopener">@globalnewsshorts</a> on Instagram</span>
 </div></footer>
+<script>
+function copyLink(btn,url){navigator.clipboard.writeText(url).then(()=>{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);});}
+</script>
 </body>
 </html>
