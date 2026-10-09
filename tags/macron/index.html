@@ -118,6 +118,39 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .tags a:hover{border-color:var(--accent);color:var(--ink)}
 .err{text-align:center;padding:90px 20px}
 .err h1{font-size:3rem;margin-bottom:10px}
+/* ---- custom video player ---- */
+.gnsv{position:relative;background:#000;overflow:hidden}
+.player .gnsv{border-radius:14px}
+.embedpage .gnsv{border-radius:8px;width:100%}
+.gnsv video{width:100%;display:block;background:#000}
+.gnsv .ctl{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;gap:6px;padding:30px 10px 8px;background:linear-gradient(transparent,rgba(0,0,0,.78));transition:opacity .25s}
+.gnsv .ctl>*{flex:0 0 auto}
+.gnsv .gseek{flex:1 1 auto;min-width:40px}
+.gnsv.idle.playing .ctl{opacity:0;pointer-events:none}
+.gnsv.idle.playing{cursor:none}
+.gbtn{position:relative;background:none;border:0;color:#fff;min-width:34px;height:34px;padding:0 6px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;border-radius:8px;font-family:inherit}
+.gbtn:hover{background:rgba(255,255,255,.16)}
+.gbtn:focus-visible{outline:2px solid #e63946;outline-offset:1px}
+.gbtn svg{width:22px;height:22px;fill:#fff;flex:0 0 auto}
+.gtip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(3px);display:flex;align-items:center;gap:8px;background:rgba(16,16,24,.96);border:1px solid #3d3d52;color:#fff;font-size:.76rem;line-height:1.4;padding:6px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:5}
+.gbtn:hover .gtip,.gvols:hover .gtip{opacity:1;transform:translateX(-50%) translateY(0)}
+.gtip kbd{font-family:inherit;font-size:.7rem;font-weight:700;border:1px solid #70708a;border-radius:5px;padding:1px 7px;background:#0c0c14;color:#fff}
+.gseek{position:relative;height:20px;display:flex;align-items:center;cursor:pointer}
+.gseek .gtrack{position:relative;width:100%;height:4px;background:rgba(255,255,255,.28);border-radius:2px}
+.gseek .gfill{position:absolute;left:0;top:0;bottom:0;width:0;background:#e63946;border-radius:2px}
+.gseek .gknob{position:absolute;top:50%;left:0;width:12px;height:12px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);opacity:0;transition:opacity .15s}
+.gseek:hover .gknob{opacity:1}
+.gseek:focus-visible{outline:2px solid #e63946;border-radius:4px}
+.gtime{color:#fff;font-size:.76rem;font-variant-numeric:tabular-nums;white-space:nowrap;user-select:none}
+.gvol{display:inline-flex;align-items:center}
+.gvols{position:relative;display:inline-flex;align-items:center}
+.gvolr{width:0;opacity:0;transition:width .18s,opacity .18s;accent-color:#e63946;cursor:pointer;padding:0;margin:0;border:0}
+.gvol:hover .gvolr,.gvolr:focus{width:62px;opacity:1}
+.gbig{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.28);border:0;cursor:pointer;padding:0}
+.gnsv.playing .gbig{display:none}
+.gbig span{width:74px;height:74px;border-radius:50%;background:rgba(230,57,70,.93);display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.gbig:hover span{transform:scale(1.07)}
+.gbig svg{width:30px;height:30px;fill:#fff;margin-left:4px}
 </style>
 </head>
 <body>
@@ -130,7 +163,7 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 <main class="wrap">
 <div class="crumb" style="margin-top:24px"><a href="/">Clips</a> / Macron</div>
 <h1 style="margin:8px 0 4px">#Macron</h1>
-<p style="color:var(--muted);margin-bottom:8px">4 clips</p>
+<p style="color:var(--muted);margin-bottom:8px">5 clips</p>
 <section class="grid">
 <a class="card" href="/clips/fauci-pleads-the-fifth/">
 <div class="thumb" style="aspect-ratio:9/16"><img src="/posters/fauci-pleads-the-fifth.jpg" alt="Fauci Pleads the Fifth" loading="lazy">
@@ -159,6 +192,13 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 <span class="badge">0:56</span></div>
 <div class="body"><h2>US Pulls B-1 Bombers From UK Base Over Iran Threat</h2>
 <p class="hook">“They didn&#x27;t fly out by accident… there was a threat.”</p>
+<p class="meta">2026-10-06</p></div></a>
+<a class="card" href="/clips/brazil-runoff-bolsonaro-lula/">
+<div class="thumb" style="aspect-ratio:16/9"><img src="/posters/brazil-runoff-bolsonaro-lula.jpg" alt="Flávio Bolsonaro Stuns Lula, Forces Brazil Runoff" loading="lazy">
+<div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div>
+<span class="badge">1:15</span></div>
+<div class="body"><h2>Flávio Bolsonaro Stuns Lula, Forces Brazil Runoff</h2>
+<p class="hook">Polls said Lula would win the first round. They were wrong.</p>
 <p class="meta">2026-10-06</p></div></a></section>
 </main>
 
