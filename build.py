@@ -180,7 +180,7 @@ footer.site a:hover{color:var(--ink)}
 .clip h1{font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.2;margin:8px 0 6px}
 .clip .hook{color:var(--muted);font-size:1.05rem;margin-bottom:20px}
 .player{max-width:430px;margin:0 auto}
-.player video{width:100%;border-radius:14px;background:#000;aspect-ratio:9/16}
+.player .plyr{width:100%}
 .clip .desc{max-width:700px;margin:26px auto 0}
 .clip .desc p{color:#cfd6ea;margin-bottom:14px}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
@@ -222,7 +222,7 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .searchbar input::placeholder{color:var(--muted)}
 #search-meta{color:var(--muted);font-size:.85rem;margin:14px 0 0;min-height:1.4em}
 .embedpage{margin:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:12px}
-.embedpage video{width:100%;max-width:400px;aspect-ratio:9/16;background:#000;border-radius:8px}
+.embedpage .plyr{width:100%;max-width:400px}
 .embedpage .t{color:#9aa3bd;font-size:.8rem;margin-top:10px;text-align:center}
 .embedpage .t a{color:#cfd6ea}
 .more{padding:10px 0 70px}
@@ -241,167 +241,59 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .tags a:hover{border-color:var(--accent);color:var(--ink)}
 .err{text-align:center;padding:90px 20px}
 .err h1{font-size:3rem;margin-bottom:10px}
-/* ---- custom video player ---- */
-.gnsv{position:relative;background:#000;overflow:hidden}
-.player .gnsv{border-radius:14px}
-.embedpage .gnsv{border-radius:8px;width:100%}
-.gnsv video{width:100%;display:block;background:#000}
-.gnsv .ctl{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;gap:6px;padding:30px 10px 8px;background:linear-gradient(transparent,rgba(0,0,0,.78));transition:opacity .25s}
-.gnsv .ctl>*{flex:0 0 auto}
-.gnsv .gseek{flex:1 1 auto;min-width:40px}
-.gnsv.idle.playing .ctl{opacity:0;pointer-events:none}
-.gnsv.idle.playing{cursor:none}
-.gbtn{position:relative;background:none;border:0;color:#fff;min-width:34px;height:34px;padding:0 6px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;border-radius:8px;font-family:inherit}
-.gbtn:hover{background:rgba(255,255,255,.16)}
-.gbtn:focus-visible{outline:2px solid #e63946;outline-offset:1px}
-.gbtn svg{width:22px;height:22px;fill:#fff;flex:0 0 auto}
-.gtip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(3px);display:flex;align-items:center;gap:8px;background:rgba(16,16,24,.96);border:1px solid #3d3d52;color:#fff;font-size:.76rem;line-height:1.4;padding:6px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:5}
-.gbtn:hover .gtip,.gvols:hover .gtip{opacity:1;transform:translateX(-50%) translateY(0)}
-.gtip kbd{font-family:inherit;font-size:.7rem;font-weight:700;border:1px solid #70708a;border-radius:5px;padding:1px 7px;background:#0c0c14;color:#fff}
-.gseek{position:relative;height:20px;display:flex;align-items:center;cursor:pointer}
-.gseek .gtrack{position:relative;width:100%;height:4px;background:rgba(255,255,255,.28);border-radius:2px}
-.gseek .gfill{position:absolute;left:0;top:0;bottom:0;width:0;background:#e63946;border-radius:2px}
-.gseek .gknob{position:absolute;top:50%;left:0;width:12px;height:12px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);opacity:0;transition:opacity .15s}
-.gseek:hover .gknob{opacity:1}
-.gseek:focus-visible{outline:2px solid #e63946;border-radius:4px}
-.gtime{color:#fff;font-size:.76rem;font-variant-numeric:tabular-nums;white-space:nowrap;user-select:none}
-.gvol{display:inline-flex;align-items:center}
-.gvols{position:relative;display:inline-flex;align-items:center}
-.gvolr{width:0;opacity:0;transition:width .18s,opacity .18s;accent-color:#e63946;cursor:pointer;padding:0;margin:0;border:0}
-.gvol:hover .gvolr,.gvolr:focus{width:62px;opacity:1}
-.gbig{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.28);border:0;cursor:pointer;padding:0}
-.gnsv.playing .gbig{display:none}
-.gbig span{width:74px;height:74px;border-radius:50%;background:rgba(230,57,70,.93);display:flex;align-items:center;justify-content:center;transition:transform .15s}
-.gbig:hover span{transform:scale(1.07)}
-.gbig svg{width:30px;height:30px;fill:#fff;margin-left:4px}
+/* ---- Plyr video player theme ---- */
+.player .plyr{border-radius:14px;overflow:hidden;--plyr-color-main:#e63946}
+.embedpage .plyr{border-radius:8px;overflow:hidden;--plyr-color-main:#e63946}
 """
 
 PLAY_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
             '<path d="M8 5v14l11-7z"/></svg>')
 
 
-# ---- custom video player: icons, behaviour, markup ----
-SVG_PLAY = ('<svg viewBox="0 0 24 24" class="ic-play" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
-            '<svg viewBox="0 0 24 24" class="ic-pause" style="display:none" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>')
-SVG_BACK = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>'
-            '<text x="12" y="15.8" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg>')
-SVG_FWD = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/>'
-           '<text x="12" y="15.8" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg>')
-SVG_VOL = ('<svg viewBox="0 0 24 24" class="ic-vol" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>'
-           '<svg viewBox="0 0 24 24" class="ic-mute" style="display:none" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>')
-SVG_FS = ('<svg viewBox="0 0 24 24" class="ic-fs" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>'
-          '<svg viewBox="0 0 24 24" class="ic-fsx" style="display:none" aria-hidden="true"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>')
+# ---- Plyr video player (CDN) ----
+PLYR_VER = "3.7.8"
+PLYR_CSS_URL = f"https://cdn.jsdelivr.net/npm/plyr@{PLYR_VER}/dist/plyr.css"
+PLYR_JS_URL = f"https://cdn.jsdelivr.net/npm/plyr@{PLYR_VER}/dist/plyr.min.js"
+PLYR_CSS_TAG = f'<link rel="stylesheet" href="{PLYR_CSS_URL}">'
+
+# Slugs that get a <track> captions element (populated in build() from transcripts.json).
+_CAPTION_SLUGS = set()
 
 # Plain (non-f) string: embedded verbatim into every clip + embed page.
-PLAYER_JS = """function gnsPlayer(vid){
-var v=document.getElementById(vid);if(!v)return;
-var box=v.parentNode;
-function q(s){return box.querySelector(s);}
-function qa(s){return box.querySelectorAll(s);}
-var bPlay=qa('[data-a="play"]'),bBack=q('[data-a="back"]'),bFwd=q('[data-a="fwd"]'),
-bMute=q('[data-a="mute"]'),bFs=q('[data-a="fs"]'),vol=q('.gvolr'),
-seek=q('.gseek'),fill=q('.gfill'),knob=q('.gknob'),
-tcur=q('.gtcur'),tdur=q('.gtdur');
-function fmt(s){s=Math.max(0,Math.floor(s||0));var m=Math.floor(s/60);s=s%60;return m+':'+(s<10?'0':'')+s;}
-function setIcons(){var p=v.paused;
-bPlay.forEach(function(b){b.querySelector('.ic-play').style.display=p?'':'none';b.querySelector('.ic-pause').style.display=p?'none':'';
-var t=b.querySelector('.gtlab');if(t)t.textContent=p?'Play':'Pause';});
-box.classList.toggle('playing',!p);}
-function setVol(){var m=v.muted||v.volume===0;
-bMute.querySelector('.ic-vol').style.display=m?'none':'';
-bMute.querySelector('.ic-mute').style.display=m?'':'none';
-var t=bMute.querySelector('.gtlab');if(t)t.textContent=v.muted?'Unmute':'Mute';
-if(document.activeElement!==vol)vol.value=Math.round((v.muted?0:v.volume)*100);}
-function setTime(){var d=v.duration||0,c=v.currentTime||0;
-tcur.textContent=fmt(c);tdur.textContent=fmt(d);
-var p=d>0?(c/d*100):0;fill.style.width=p+'%';knob.style.left=p+'%';
-seek.setAttribute('aria-valuenow',Math.round(p));}
-function toggle(){if(v.paused)v.play();else v.pause();}
-bPlay.forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();toggle();});});
-v.addEventListener('click',toggle);
-box.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('button'):null;if(b)b.blur();});
-bBack.addEventListener('click',function(){v.currentTime=Math.max(0,v.currentTime-10);});
-bFwd.addEventListener('click',function(){v.currentTime=Math.min(v.duration||0,v.currentTime+10);});
-bMute.addEventListener('click',function(){v.muted=!v.muted;if(!v.muted&&v.volume===0)v.volume=0.5;});
-vol.addEventListener('input',function(){v.volume=vol.value/100;v.muted=(vol.value==0);});
-bFs.addEventListener('click',function(){
-if(document.fullscreenElement){document.exitFullscreen();return;}
-var f=box.requestFullscreen||box.webkitRequestFullscreen;
-if(f)f.call(box);else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen();});
-document.addEventListener('fullscreenchange',function(){var fs=!!document.fullscreenElement;
-bFs.querySelector('.ic-fs').style.display=fs?'none':'';
-bFs.querySelector('.ic-fsx').style.display=fs?'':'none';});
-var drag=false,pend=0;
-function pos(e){var r=seek.getBoundingClientRect();
-var x=(e.clientX!==undefined&&e.clientX!==null)?e.clientX:(e.touches&&e.touches[0].clientX);
-return Math.min(1,Math.max(0,(x-r.left)/r.width));}
-function scrub(e){var p=pos(e),d=v.duration||0;pend=d*p;
-fill.style.width=(p*100)+'%';knob.style.left=(p*100)+'%';tcur.textContent=fmt(pend);}
-seek.addEventListener('pointerdown',function(e){drag=true;try{seek.setPointerCapture(e.pointerId);}catch(_){}scrub(e);});
-seek.addEventListener('pointermove',function(e){if(drag)scrub(e);});
-seek.addEventListener('pointerup',function(){if(drag){drag=false;v.currentTime=pend;}});
-seek.addEventListener('pointercancel',function(){drag=false;});
-seek.addEventListener('keydown',function(e){e.stopPropagation();
-var d=v.duration||0;
-if(e.key==='ArrowLeft'){v.currentTime=Math.max(0,v.currentTime-10);e.preventDefault();}
-else if(e.key==='ArrowRight'){v.currentTime=Math.min(d,v.currentTime+10);e.preventDefault();}});
-v.addEventListener('play',setIcons);v.addEventListener('pause',setIcons);
-v.addEventListener('timeupdate',function(){if(!drag)setTime();});
-v.addEventListener('loadedmetadata',function(){setTime();setVol();});
-v.addEventListener('volumechange',setVol);
-v.addEventListener('ended',setIcons);
-setIcons();setVol();setTime();
-var t0=location.search.match(/[?&]t=(\\d+(?:\\.\\d+)?)/);
-if(t0){v.addEventListener('loadedmetadata',function(){v.currentTime=parseFloat(t0[1]);},{once:true});}
-var idle=null;
-function wake(){box.classList.remove('idle');if(idle)clearTimeout(idle);
-idle=setTimeout(function(){if(!v.paused)box.classList.add('idle');},2600);}
-box.addEventListener('mousemove',wake);
-box.addEventListener('touchstart',wake,{passive:true});
-wake();
-document.addEventListener('keydown',function(e){
-var t=e.target;
-if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable))return;
-if(e.ctrlKey||e.metaKey||e.altKey)return;
-var k=e.key;
-if(k===' '&&t&&t.tagName==='BUTTON')return;
-var h=true;
-if(k===' '||k==='k'||k==='K')toggle();
-else if(k==='j'||k==='J'||k==='ArrowLeft')v.currentTime=Math.max(0,v.currentTime-10);
-else if(k==='l'||k==='L'||k==='ArrowRight')v.currentTime=Math.min(v.duration||0,v.currentTime+10);
-else if(k==='m'||k==='M')bMute.click();
-else if(k==='f'||k==='F')bFs.click();
-else if(k==='ArrowUp'){v.muted=false;v.volume=Math.min(1,Math.round((v.volume+0.1)*10)/10);}
-else if(k==='ArrowDown'){v.volume=Math.max(0,Math.round((v.volume-0.1)*10)/10);if(v.volume===0)v.muted=true;}
-else if(k.length===1&&k>='0'&&k<='9'){var d=v.duration||0;if(d)v.currentTime=d*(+k)/10;}
-else h=false;
-if(h){e.preventDefault();wake();}
+PLAYER_JS = """(function(){
+var vid='__VID__',ratio='__RATIO__';
+var v=document.getElementById(vid);
+if(!v)return;
+if(!window.Plyr){v.setAttribute('controls','');return;}
+var p=new Plyr(v,{
+ratio:ratio,
+controls:['play-large','play','progress','current-time','duration','mute','volume','captions','settings','fullscreen'],
+settings:['captions','speed'],
+seekTime:10,
+tooltips:{controls:true,seek:true},
+captions:{active:true,language:'en',update:true},
+speed:{selected:1,options:[0.5,0.75,1,1.25,1.5,2]},
+fullscreen:{enabled:true,fallback:true,iosNative:true}
 });
-}
-"""
+window.__plyrPlayers=window.__plyrPlayers||{};
+window.__plyrPlayers[vid]=p;
+var t0=location.search.match(/[?&]t=(\\d+(?:\\.\\d+)?)/);
+if(t0){var t=parseFloat(t0[1]);p.on('loadedmetadata',function(){p.currentTime=t;});}
+})();"""
 
 
-def player_markup(vid, poster, aspect, extra_attrs="", inner=""):
-    """Custom player markup: video (no native controls) + overlay controls + init script."""
+def player_markup(vid, poster, aspect, slug, extra_attrs="", inner=""):
+    """Plyr player markup: video + captions track + CDN script + init script."""
+    ratio = aspect.replace("/", ":")
+    track = (f'<track kind="captions" label="English" srclang="en" '
+             f'src="/captions/{slug}.vtt" default>' if slug in _CAPTION_SLUGS else "")
+    js = PLAYER_JS.replace("__VID__", vid).replace("__RATIO__", ratio)
     return (
-        '<div class="gnsv">'
-        f'<video id="{vid}" playsinline preload="metadata" poster="{poster}" style="aspect-ratio:{aspect}"{extra_attrs}>{inner}</video>'
-        '<button class="gbig" data-a="play" aria-label="Play"><span>'
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
-        '</span></button>'
-        '<div class="ctl">'
-        f'<button class="gbtn" data-a="back" aria-label="Back 10 seconds">{SVG_BACK}<span class="gtip"><span class="gtlab">Back 10s</span><kbd>J</kbd></span></button>'
-        f'<button class="gbtn" data-a="play" aria-label="Play or pause">{SVG_PLAY}<span class="gtip"><span class="gtlab">Play</span><kbd>Space</kbd></span></button>'
-        f'<button class="gbtn" data-a="fwd" aria-label="Forward 10 seconds">{SVG_FWD}<span class="gtip"><span class="gtlab">Forward 10s</span><kbd>L</kbd></span></button>'
-        '<div class="gseek" data-a="seek" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="gtrack"><div class="gfill"></div></div><div class="gknob"></div></div>'
-        '<span class="gtime"><span class="gtcur">0:00</span> / <span class="gtdur">0:00</span></span>'
-        f'<span class="gvol"><button class="gbtn" data-a="mute" aria-label="Mute or unmute">{SVG_VOL}<span class="gtip"><span class="gtlab">Mute</span><kbd>M</kbd></span></button><span class="gvols"><input class="gvolr" type="range" min="0" max="100" value="100" aria-label="Volume"><span class="gtip"><span class="gtlab">Volume</span><kbd>&#8593; &#8595;</kbd></span></span></span>'
-        f'<button class="gbtn" data-a="fs" aria-label="Toggle fullscreen">{SVG_FS}<span class="gtip"><span class="gtlab">Fullscreen</span><kbd>F</kbd></span></button>'
-        '</div>'
-        '</div>'
-        '<script>' + PLAYER_JS + f'gnsPlayer("{vid}");</script>'
+        f'<video id="{vid}" class="plyr" playsinline preload="metadata" '
+        f'poster="{poster}" style="aspect-ratio:{aspect}"{extra_attrs}>{inner}{track}</video>'
+        f'<script src="{PLYR_JS_URL}"></script>'
+        '<script>' + js + '</script>'
     )
-
 
 def esc(s):
     return html.escape(s, quote=True)
@@ -453,7 +345,7 @@ FOOTER = f"""
 <script>
 function copyLink(btn,url){{navigator.clipboard.writeText(url).then(()=>{{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);}});}}
 function copyEmbed(btn){{const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);}});}}
-function seekTo(btn){{const v=document.getElementById('clipvideo');if(!v)return;v.currentTime=parseFloat(btn.dataset.t);v.play();v.scrollIntoView({{behavior:'smooth',block:'center'}});}}
+function seekTo(btn){{const v=document.getElementById('clipvideo');if(!v)return;const t=parseFloat(btn.dataset.t);const ps=window.__plyrPlayers||{{}};const p=ps['clipvideo'];if(p){{p.currentTime=t;p.play();}}else{{v.currentTime=t;v.play();}}v.scrollIntoView({{behavior:'smooth',block:'center'}});}}
 </script>
 </body>
 </html>
@@ -462,6 +354,25 @@ function seekTo(btn){{const v=document.getElementById('clipvideo');if(!v)return;
 
 def fmt_dur(s):
     return f"{s // 60}:{s % 60:02d}"
+
+
+def _vtt_time(s):
+    s = max(0.0, float(s))
+    h = int(s // 3600)
+    m = int((s % 3600) // 60)
+    sec = s % 60
+    return f"{h:02d}:{m:02d}:{sec:06.3f}"
+
+
+def cues_to_vtt(cues):
+    """Convert faster-whisper cues ([{start, end, text}]) to WebVTT."""
+    out = ["WEBVTT", ""]
+    for x in cues:
+        text = x["text"].replace("-->", "->").replace("&", "&amp;").replace("<", "&lt;").strip()
+        if not text:
+            continue
+        out += [_vtt_time(x["start"]) + " --> " + _vtt_time(x["end"]), text, ""]
+    return "\n".join(out) + "\n"
 
 
 def clip_card(c):
@@ -495,6 +406,7 @@ def build():
     os.makedirs(DIST)
     os.makedirs(os.path.join(DIST, "videos"))
     os.makedirs(os.path.join(DIST, "posters"))
+    os.makedirs(os.path.join(DIST, "captions"))
 
     shutil.copy(os.path.join(SRC, "logo.png"), os.path.join(DIST, "logo.png"))
     shutil.copy(os.path.join(SRC, "favicon.svg"), os.path.join(DIST, "favicon.svg"))
@@ -515,6 +427,10 @@ def build():
             c["cues"] = [{"t": x["start"], "text": x["text"]} for x in cues]
             c["transcript"] = " ".join(x["text"] for x in c["cues"])
             c["cue_count"] = len(cues)
+            # WebVTT captions for the Plyr <track> element
+            vtt = cues_to_vtt(cues)
+            open(os.path.join(DIST, "captions", c["slug"] + ".vtt"), "w").write(vtt)
+            _CAPTION_SLUGS.add(c["slug"])
 
     # ---- index ----
     cards = "".join(clip_card(c) for c in CLIPS)
@@ -625,6 +541,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
             "clipvideo",
             f"/posters/{c['slug']}.jpg",
             ar_css,
+            c["slug"],
             "",
             f'<source src="/videos/{c["slug"]}.mp4" type="video/mp4">')
         page = (head(f"{c['title']} | {BRAND}", c["description"], page_url,
@@ -634,7 +551,8 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
                      f'<meta property="og:video:type" content="video/mp4">\n'
                      f'<meta property="og:video:width" content="{vw}">\n'
                      f'<meta property="og:video:height" content="{vh}">\n'
-                     f'<script type="application/ld+json">{json.dumps(ld)}</script>')
+                     f'<script type="application/ld+json">{json.dumps(ld)}</script>\n'
+                     f'{PLYR_CSS_TAG}')
                 + HEADER + f"""
 <main class="wrap clip">
 <div class="crumb"><a href="/">Clips</a> / {esc(c['title'])}</div>
@@ -684,6 +602,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
             "embedvideo",
             f"/posters/{c['slug']}.jpg",
             ar,
+            c["slug"],
             f' src="/videos/{c["slug"]}.mp4"')
         epage = f"""<!DOCTYPE html>
 <html lang="en">
@@ -693,6 +612,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
 <meta name="robots" content="noindex">
 <title>{esc(c['title'])} | {BRAND}</title>
 <style>{CSS}</style>
+{PLYR_CSS_TAG}
 </head>
 <body>
 <div class="embedpage">
