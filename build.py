@@ -433,7 +433,7 @@ def build():
             _CAPTION_SLUGS.add(c["slug"])
 
     # ---- index ----
-    cards = "".join(clip_card(c) for c in CLIPS)
+    cards = "".join(clip_card(c) for c in sorted(CLIPS, key=lambda c: c["duration_s"]))
 
     site_ld = json.dumps({
         "@context": "https://schema.org", "@type": "WebSite",
