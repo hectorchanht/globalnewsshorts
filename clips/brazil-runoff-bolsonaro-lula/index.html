@@ -7,6 +7,9 @@
 <meta name="description" content="Brazil is heading to a presidential runoff on October 25 after Flávio Bolsonaro — the 45-year-old son of jailed former president Jair Bolsonaro — stunned the polls by finishing first with 47.03% of the vote, ahead of incumbent President Luiz Inácio Lula da Silva&#x27;s 45.16%. Lula, 80, admitted he was ‘convinced’ he would win outright in the first round. The 2.2-million-vote gap is one of the narrowest in recent Brazilian history, and the two frontrunners took 92% of all votes — the most polarized first round since democracy returned in 1985.">
 <link rel="canonical" href="https://globalnewsshorts.com/clips/brazil-runoff-bolsonaro-lula/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0b1020">
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "859afe99778f4d5b9554a9b5c7c84bb8"}'></script><!-- End Cloudflare Web Analytics -->
 <meta property="og:site_name" content="Global News Shorts">
@@ -220,6 +223,7 @@ if(t0){var t=parseFloat(t0[1]);p.on('loadedmetadata',function(){p.currentTime=t;
 function copyLink(btn,url){navigator.clipboard.writeText(url).then(()=>{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);});}
 function copyEmbed(btn){const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);});}
 function seekTo(btn){const v=document.getElementById('clipvideo');if(!v)return;const t=parseFloat(btn.dataset.t);const ps=window.__plyrPlayers||{};const p=ps['clipvideo'];if(p){p.currentTime=t;p.play();}else{v.currentTime=t;v.play();}v.scrollIntoView({behavior:'smooth',block:'center'});}
+if("serviceWorker" in navigator){try{navigator.serviceWorker.register("/sw.js");}catch(e){}}
 </script>
 </body>
 </html>
