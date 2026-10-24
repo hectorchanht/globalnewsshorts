@@ -315,6 +315,9 @@ def head(title, desc, canonical, extra=""):
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canonical}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0b1020">
 {BEACON}
 <meta property="og:site_name" content="{BRAND}">
@@ -346,6 +349,7 @@ FOOTER = f"""
 function copyLink(btn,url){{navigator.clipboard.writeText(url).then(()=>{{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);}});}}
 function copyEmbed(btn){{const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);}});}}
 function seekTo(btn){{const v=document.getElementById('clipvideo');if(!v)return;const t=parseFloat(btn.dataset.t);const ps=window.__plyrPlayers||{{}};const p=ps['clipvideo'];if(p){{p.currentTime=t;p.play();}}else{{v.currentTime=t;v.play();}}v.scrollIntoView({{behavior:'smooth',block:'center'}});}}
+if("serviceWorker" in navigator){{try{{navigator.serviceWorker.register("/sw.js");}}catch(e){{}}}}
 </script>
 </body>
 </html>
@@ -410,6 +414,10 @@ def build():
 
     shutil.copy(os.path.join(SRC, "logo.png"), os.path.join(DIST, "logo.png"))
     shutil.copy(os.path.join(SRC, "favicon.svg"), os.path.join(DIST, "favicon.svg"))
+    for _pwa in ["sw.js", "site.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"]:
+        _p = os.path.join(SRC, _pwa)
+        if os.path.exists(_p):
+            shutil.copy(_p, os.path.join(DIST, _pwa))
 
     # IndexNow key file (https://www.indexnow.org/) — optional
     _key = None
