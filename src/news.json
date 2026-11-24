@@ -1,1 +1,52 @@
-[{"categories":["Climate","COP31","World","Fossil fuels"],"published_at":"2026-11-23","slug":"cop31-climate-talks-end-without-deal","sources":[{"name":"Associated Press via NPR / North Country Public Radio","url":"https://www.northcountrypublicradio.org/news/npr/nx-s1-6046195/climate-change-talks-fall-apart-in-final-hours-over-fossil-fuels"},{"name":"UCL News / The Conversation","url":"https://www.ucl.ac.uk/news/2026/nov/comment-cop31-why-un-climate-summit-ended-victory-fossil-fuel-producing-nations"},{"name":"Carbon Brief (summarising BBC News coverage)","url":"https://www.carbonbrief.org/daily-briefing-cop31-fails-uk-eu-carbon-link-chinas-electrification"}],"summary":"Nearly 200 countries closed the COP31 UN climate summit in Antalya, Turkey, on Sunday without an overarching agreement, after negotiations ran two days overtime and became the longest UN climate conference in history. The European Union, Pacific island nations and other delegations rejected the final draft because it did not directly mention fossil fuels, the main driver of global warming, while oil-producing states led by Saudi Arabia had pushed to keep that language out. Rows over climate finance for poorer countries deepened the deadlock, and the summit also marked a formal acknowledgement that the world is set to overshoot the 1.5C warming limit agreed in Paris.","title":"COP31 Climate Talks End Without a Deal Over Fossil Fuels","why":"Without a shared deal naming fossil fuels or unlocking fresh finance, the global effort to slow warming and help vulnerable countries adapt heads into next year's talks with no new momentum."}]
+[
+  {
+    "slug": "ukraine-sinks-russian-corvette-merkury-libya",
+    "title": "Ukraine Sinks Russian Warship in Libya, Taking Its Drone War to the Mediterranean",
+    "summary": "Ukraine said on Monday that its naval drones sank the Russian corvette Merkury at the Benghazi naval base in eastern Libya on Sunday, in Kyiv’s first acknowledged attack in the country. President Volodymyr Zelenskiy said seven Ukrainian-made sea drones were used in the operation, which also destroyed a Ka-27 combat helicopter aboard the ship and hit the Russian cargo vessel MV Angara, which Kyiv says Moscow used to transport weapons. Satellite imagery showed the corvette capsized and largely submerged after the strike. Libya’s eastern-based government said the ship had docked to refuel and resupply under a cooperation agreement with Russia and has asked the United Nations to investigate, while the Tripoli government objected to Libya being drawn into external conflicts.",
+    "why": "The strike carries the Russia-Ukraine war into the Mediterranean, showing Kyiv can hit Russian military logistics far beyond the Black Sea — and dragging a divided Libya deeper into a conflict it did not choose.",
+    "categories": [
+      "Ukraine",
+      "Russia",
+      "Libya",
+      "World"
+    ],
+    "published_at": "2026-11-24",
+    "sources": [
+      {
+        "name": "Associated Press",
+        "url": "https://www.military.com/suspected-ukrainian-sea-drones-hit-russian-warship-at-benghazi-naval-base"
+      },
+      {
+        "name": "Reuters",
+        "url": "https://ktwb.com/2026/11/23/zelenskiy-says-ukraine-sank-russian-corvette-near-libyas-coast-hit-cargo-ship/"
+      }
+    ]
+  },
+  {
+    "categories": [
+      "Climate",
+      "COP31",
+      "World",
+      "Fossil fuels"
+    ],
+    "published_at": "2026-11-23",
+    "slug": "cop31-climate-talks-end-without-deal",
+    "sources": [
+      {
+        "name": "Associated Press via NPR / North Country Public Radio",
+        "url": "https://www.northcountrypublicradio.org/news/npr/nx-s1-6046195/climate-change-talks-fall-apart-in-final-hours-over-fossil-fuels"
+      },
+      {
+        "name": "UCL News / The Conversation",
+        "url": "https://www.ucl.ac.uk/news/2026/nov/comment-cop31-why-un-climate-summit-ended-victory-fossil-fuel-producing-nations"
+      },
+      {
+        "name": "Carbon Brief (summarising BBC News coverage)",
+        "url": "https://www.carbonbrief.org/daily-briefing-cop31-fails-uk-eu-carbon-link-chinas-electrification"
+      }
+    ],
+    "summary": "Nearly 200 countries closed the COP31 UN climate summit in Antalya, Turkey, on Sunday without an overarching agreement, after negotiations ran two days overtime and became the longest UN climate conference in history. The European Union, Pacific island nations and other delegations rejected the final draft because it did not directly mention fossil fuels, the main driver of global warming, while oil-producing states led by Saudi Arabia had pushed to keep that language out. Rows over climate finance for poorer countries deepened the deadlock, and the summit also marked a formal acknowledgement that the world is set to overshoot the 1.5C warming limit agreed in Paris.",
+    "title": "COP31 Climate Talks End Without a Deal Over Fossil Fuels",
+    "why": "Without a shared deal naming fossil fuels or unlocking fresh finance, the global effort to slow warming and help vulnerable countries adapt heads into next year's talks with no new momentum."
+  }
+]
