@@ -71,5 +71,28 @@
     "summary": "Nearly 200 countries closed the COP31 UN climate summit in Antalya, Turkey, on Sunday without an overarching agreement, after negotiations ran two days overtime and became the longest UN climate conference in history. The European Union, Pacific island nations and other delegations rejected the final draft because it did not directly mention fossil fuels, the main driver of global warming, while oil-producing states led by Saudi Arabia had pushed to keep that language out. Rows over climate finance for poorer countries deepened the deadlock, and the summit also marked a formal acknowledgement that the world is set to overshoot the 1.5C warming limit agreed in Paris.",
     "title": "COP31 Climate Talks End Without a Deal Over Fossil Fuels",
     "why": "Without a shared deal naming fossil fuels or unlocking fresh finance, the global effort to slow warming and help vulnerable countries adapt heads into next year's talks with no new momentum."
+  },
+  {
+    "slug": "nato-russia-nuclear-satellite-space-threat",
+    "title": "NATO Vows to Defend Space After Reports Russia May Launch Nuclear-Armed Satellite",
+    "summary": "German public broadcasters WDR and NDR and the newspaper Süddeutsche Zeitung reported on Monday that Russia could launch a satellite carrying a nuclear warhead, dubbed “Sputnik-S”, within 60 days — possibly before the end of the year. The satellite has reportedly been assembled and stored near Moscow for several years, and an intelligence assessment shared among NATO countries this month warned of a possible launch. NATO Secretary-General Mark Rutte said in Berlin that the alliance would defend against any threat in space, while German Chancellor Friedrich Merz neither confirmed nor denied the reports but said they “reveal the level of escalation Russia is evidently prepared to pursue.” Moscow rejected the reports as propaganda, and placing a nuclear weapon in orbit would breach the 1967 Outer Space Treaty, which Russia signed.",
+    "why": "A nuclear detonation in orbit could destroy or disable large numbers of satellites and cripple communications and power grids on Earth with its electromagnetic pulse — which is why the European Space Agency’s chief called nuclear weapons in space “the ultimate nightmare scenario.”",
+    "categories": [
+      "Russia",
+      "NATO",
+      "Space",
+      "World"
+    ],
+    "published_at": "2026-11-24",
+    "sources": [
+      {
+        "name": "Defense News",
+        "url": "https://www.defensenews.com/global/europe/2026/11/24/russia-may-launch-nuke-laden-satellite-by-years-end-german-report-warns/"
+      },
+      {
+        "name": "The Business Standard",
+        "url": "https://www.tbsnews.net/worldbiz/europe/nato-chief-vows-defend-against-space-threats-amid-reports-russian-nuclear-satellite"
+      }
+    ]
   }
 ]
