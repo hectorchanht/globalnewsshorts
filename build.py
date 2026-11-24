@@ -241,6 +241,30 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 .tags a:hover{border-color:var(--accent);color:var(--ink)}
 .err{text-align:center;padding:90px 20px}
 .err h1{font-size:3rem;margin-bottom:10px}
+/* ---- icon sweep: icon-only controls, fixed geometry ---- */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+nav.links{gap:8px}
+nav.links a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%}
+nav.links a svg{width:20px;height:20px;fill:currentColor}
+.share a,.share button{width:38px;height:38px;padding:0;justify-content:center;border-radius:50%}
+.share .lbl{display:inline-flex;align-items:center}
+.share .lbl svg{width:18px;height:18px;fill:var(--muted)}
+footer.site .ficons{display:inline-flex;gap:8px;align-items:center}
+footer.site .ficons a{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border:1px solid #2a3568;border-radius:50%;color:var(--muted)}
+footer.site .ficons a:hover{color:var(--ink);border-color:var(--accent)}
+footer.site .ficons svg{width:16px;height:16px;fill:currentColor}
+.embed-box .row button{display:inline-flex;width:32px;height:32px;padding:0;align-items:center;justify-content:center;border-radius:50%}
+.embed-box .row button svg{width:15px;height:15px;fill:currentColor}
+.prevnext .k{display:flex}
+.prevnext .k svg{width:16px;height:16px;fill:currentColor}
+.prevnext .next .k{justify-content:flex-end}
+details.transcript summary{display:flex;align-items:center;gap:8px;list-style:none}
+details.transcript summary svg{width:18px;height:18px;fill:currentColor;flex:none}
+.crumb a.icn,.src a.icn{display:inline-flex;vertical-align:middle}
+.crumb svg{width:16px;height:16px;fill:currentColor}
+.src svg{width:15px;height:15px;fill:currentColor}
+.err a.icn{display:inline-flex}
+.err a.icn svg{width:22px;height:22px;fill:currentColor}
 /* ---- Plyr video player theme ---- */
 .player .plyr{border-radius:14px;overflow:hidden;--plyr-color-main:#e63946}
 .embedpage .plyr{border-radius:8px;overflow:hidden;--plyr-color-main:#e63946}
@@ -248,6 +272,21 @@ details.transcript .tbody p:last-child{margin-bottom:0}
 
 PLAY_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
             '<path d="M8 5v14l11-7z"/></svg>')
+# Icon sweep (Dawn-Design §8): material-style fill glyphs, fixed size via CSS.
+def _g(path):
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + path + '"/></svg>'
+HOME_SVG = _g("M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z")
+INFO_SVG = _g("M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z")
+RSS_SVG = _g("M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z")
+TAG_SVG = _g("M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z")
+IG_SVG = _g("M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z")
+SHARE_SVG = _g("M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z")
+EXT_SVG = _g("M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z")
+COPY_SVG = _g("M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z")
+CHECK_SVG = _g("M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z")
+CHEV_L_SVG = _g("M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z")
+CHEV_R_SVG = _g("M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z")
+CAPTIONS_SVG = _g("M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 7H9.5v-.5h-2v3h2V13H11v1c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zm7 0h-1.5v-.5h-2v3h2V13H18v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1z")
 
 
 # ---- Plyr video player (CDN) ----
@@ -336,24 +375,24 @@ def head(title, desc, canonical, extra=""):
 HEADER = f"""
 <header class="top"><div class="wrap">
 <a class="brand" href="/"><img src="/logo.png" alt="Global News Shorts logo"><span>Global News Shorts</span></a>
-<nav class="links"><a href="/">Clips</a><a href="/about/">About</a><a href="{IG}" rel="noopener">Instagram</a></nav>
+<nav class="links"><a href="/" aria-label="Clips" title="Clips">{PLAY_SVG}</a><a href="/about/" aria-label="About" title="About">{INFO_SVG}</a><a href="{IG}" rel="noopener" aria-label="Instagram" title="Instagram">{IG_SVG}</a></nav>
 </div></header>
 """
 
 FOOTER = f"""
 <footer class="site"><div class="wrap">
 <span>© {date.today().year} {BRAND} — {TAGLINE}.</span>
-<span><a href="/feed.xml">RSS</a> · <a href="/tags/">Tags</a> · <a href="/about/">About</a> · Follow <a href="{IG}" rel="noopener">@globalnewsshorts</a> on Instagram</span>
+<span class="ficons"><a href="/feed.xml" aria-label="RSS feed" title="RSS feed">{RSS_SVG}</a><a href="/tags/" aria-label="Tags" title="Tags">{TAG_SVG}</a><a href="/about/" aria-label="About" title="About">{INFO_SVG}</a><a href="{IG}" rel="noopener" aria-label="Instagram" title="Instagram">{IG_SVG}</a></span>
 </div></footer>
 <script>
-function copyLink(btn,url){{navigator.clipboard.writeText(url).then(()=>{{const t=btn.querySelector('.t');const o=t.textContent;t.textContent='Copied!';setTimeout(()=>t.textContent=o,1500);}});}}
-function copyEmbed(btn){{const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);}});}}
+function copyLink(btn,url){{navigator.clipboard.writeText(url).then(()=>{{const o=btn.innerHTML;btn.innerHTML='__CHECK_SVG__';setTimeout(()=>btn.innerHTML=o,1500);}});}}
+function copyEmbed(btn){{const ta=document.getElementById('embedcode');ta.select();navigator.clipboard.writeText(ta.value).then(()=>{{const o=btn.innerHTML;btn.innerHTML='__CHECK_SVG__';setTimeout(()=>btn.innerHTML=o,1500);}});}}
 function seekTo(btn){{const v=document.getElementById('clipvideo');if(!v)return;const t=parseFloat(btn.dataset.t);const ps=window.__plyrPlayers||{{}};const p=ps['clipvideo'];if(p){{p.currentTime=t;p.play();}}else{{v.currentTime=t;v.play();}}v.scrollIntoView({{behavior:'smooth',block:'center'}});}}
 if("serviceWorker" in navigator){{try{{navigator.serviceWorker.register("/sw.js");}}catch(e){{}}}}
 </script>
 </body>
 </html>
-"""
+""".replace("__CHECK_SVG__", CHECK_SVG)
 
 
 def fmt_dur(s):
@@ -510,10 +549,10 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
         pn = ""
         if prev_c or next_c:
             pn = '<nav class="prevnext">'
-            pn += (f'<a href="/clips/{prev_c["slug"]}/"><div class="k">← Previous</div>'
+            pn += (f'<a href="/clips/{prev_c["slug"]}/"><div class="k">{CHEV_L_SVG}</div>'
                    f'<div class="t">{esc(prev_c["title"])}</div></a>'
                    if prev_c else '<span></span>')
-            pn += (f'<a class="next" href="/clips/{next_c["slug"]}/"><div class="k">Next →</div>'
+            pn += (f'<a class="next" href="/clips/{next_c["slug"]}/"><div class="k">{CHEV_R_SVG}</div>'
                    f'<div class="t">{esc(next_c["title"])}</div></a>'
                    if next_c else '')
             pn += '</nav>'
@@ -526,8 +565,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
                 f'{fmt_dur(int(x["t"]))}</button> {esc(x["text"])}</p>'
                 for x in c["cues"])
             nseg = c.get("cue_count", len(c["cues"]))
-            tx_block = (f'<details class="transcript"><summary>Full transcript '
-                        f'({nseg} segments)</summary><div class="tbody">{paras}</div></details>\n'
+            tx_block = (f'<details class="transcript"><summary>{CAPTIONS_SVG}<span class="sr-only">Full transcript</span>({nseg})</summary><div class="tbody">{paras}</div></details>\n'
                         '<p class="ai-note">\u2726 Transcript auto-generated by AI \u2014 may contain errors.</p>')
         ld = {
             "@context": "https://schema.org",
@@ -563,7 +601,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
                      f'{PLYR_CSS_TAG}')
                 + HEADER + f"""
 <main class="wrap clip">
-<div class="crumb"><a href="/">Clips</a> / {esc(c['title'])}</div>
+<div class="crumb"><a class="icn" href="/" aria-label="Clips" title="Clips">{PLAY_SVG}</a> / {esc(c['title'])}</div>
 <h1>{esc(c['title'])}</h1>
 <p class="hook">{esc(c['hook'])}</p>
 <div class="player" style="max-width:{pmax}">
@@ -573,18 +611,18 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
 <div class="tags">{tags}</div></div>
 {tx_block}
 <div class="share">
-<span class="lbl">Share</span>
-<button onclick="copyLink(this,'{page_url}')" aria-label="Copy link"><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg><span class="t">Copy link</span></button>
-<a href="https://twitter.com/intent/tweet?text={qtitle}&url={qurl}" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg>Post</a>
-<a href="https://www.facebook.com/sharer/sharer.php?u={qurl}" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>Share</a>
-<a href="https://wa.me/?text={qtitle}%20{qurl}" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Send</a>
-<button onclick="document.getElementById('embedbox').classList.toggle('open')" aria-label="Embed this clip"><svg viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg><span class="t">Embed</span></button>
+<span class="lbl">{SHARE_SVG}<span class="sr-only">Share</span></span>
+<button onclick="copyLink(this,'{page_url}')" aria-label="Copy link"><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg></button>
+<a href="https://twitter.com/intent/tweet?text={qtitle}&url={qurl}" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u={qurl}" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+<a href="https://wa.me/?text={qtitle}%20{qurl}" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+<button onclick="document.getElementById('embedbox').classList.toggle('open')" aria-label="Embed this clip"><svg viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></button>
 </div>
 <div class="embed-box" id="embedbox">
-<div class="row"><strong>Embed this clip</strong><button onclick="copyEmbed(this)">Copy code</button></div>
+<div class="row"><strong>Embed this clip</strong><button onclick="copyEmbed(this)" aria-label="Copy code" title="Copy code">{COPY_SVG}</button></div>
 <textarea id="embedcode" readonly>&lt;iframe width="360" height="640" src="{SITE}/embed/{c['slug']}/" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
 </div>
-<div class="src">{esc(c['source'])} · <a href="{c['ig_url']}" rel="noopener">{watch_label}</a></div>
+<div class="src">{esc(c['source'])} · <a class="icn" href="{c['ig_url']}" rel="noopener" aria-label="{watch_label}" title="{watch_label}">{EXT_SVG}</a></div>
 {rel_section}
 {pn}
 </main>
@@ -639,7 +677,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
     # ---- 404 ----
     err = (head("Not found | " + BRAND, "Page not found.", SITE + "/404.html")
            + HEADER + """
-<main class="wrap err"><h1>404</h1><p>That clip doesn't exist (yet). <a href="/">Back to clips</a>.</p></main>
+<main class="wrap err"><h1>404</h1><p>That clip doesn't exist (yet).</p><p><a class="icn" href="/" aria-label="Back to clips" title="Back to clips">{HOME_SVG}</a></p></main>
 """ + FOOTER)
     open(os.path.join(DIST, "404.html"), "w").write(err)
 
@@ -651,7 +689,7 @@ window._card=c=>`<a class="card" href="$${{c.url}}"><div class="thumb"><img src=
                   f'<meta property="og:image" content="{SITE}/logo.png">')
                + HEADER + """
 <main class="wrap about">
-<div class="crumb"><a href="/">Home</a> / About</div>
+<div class="crumb"><a class="icn" href="/" aria-label="Home" title="Home">{HOME_SVG}</a> / About</div>
 <h1>About Global News Shorts</h1>
 <p><strong>Global News Shorts</strong> is USA &amp; world news, in shorts. The important stuff, daily —
 short clips from the hearings, speeches and moments that matter, cut straight to the point.</p>
@@ -688,7 +726,7 @@ as the source of truth. A few clips (heavy crowd noise, music or chanting) ship 
                       f'<meta property="og:image" content="{SITE}/logo.png">')
                  + HEADER + f"""
 <main class="wrap">
-<div class="crumb" style="margin-top:24px"><a href="/">Clips</a> / {esc(name)}</div>
+<div class="crumb" style="margin-top:24px"><a class="icn" href="/" aria-label="Clips" title="Clips">{PLAY_SVG}</a> / {esc(name)}</div>
 <h1 style="margin:8px 0 4px">#{esc(name)}</h1>
 <p style="color:var(--muted);margin-bottom:8px">{len(tagged)} clip{'s' if len(tagged)!=1 else ''}</p>
 <section class="grid">{cards}</section>
@@ -711,7 +749,7 @@ as the source of truth. A few clips (heavy crowd noise, music or chanting) ship 
                   f'<meta property="og:image" content="{SITE}/logo.png">')
             + HEADER + f"""
 <main class="wrap">
-<div class="crumb" style="margin-top:24px"><a href="/">Clips</a> / Tags</div>
+<div class="crumb" style="margin-top:24px"><a class="icn" href="/" aria-label="Clips" title="Clips">{PLAY_SVG}</a> / Tags</div>
 <h1 style="margin:8px 0 4px">Browse by tag</h1>
 <p style="color:var(--muted)">Every topic we clip, A–Z.</p>
 <div class="taglist">{taglinks}</div>
