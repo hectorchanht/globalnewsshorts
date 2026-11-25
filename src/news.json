@@ -1,5 +1,32 @@
 [
   {
+    "slug": "iran-tankers-mines-strait-of-hormuz",
+    "title": "Iran Claims More Tankers Hit Mines in Strait of Hormuz as It Tightens Its Grip",
+    "summary": "Iran's navy said on Tuesday that two more oil tankers struck naval mines and caught fire in the Strait of Hormuz, a day after the Revolutionary Guard claimed three tankers had hit mines despite a US Navy escort. Iran's army chief said the waterway would be \"more closed day by day,\" and the navy said the strait \"will never open until Iran's goals and demands are met.\" Neither claim has been independently verified — no ships were named and no casualty figures were given — while the UK maritime agency UKMTO separately confirmed three vessels were struck by unidentified projectiles while transiting eastbound on Sunday.",
+    "why": "The Strait of Hormuz carries a large share of the world's seaborne oil, so disputed claims of mines and attacks on tankers raise the risk to global energy supplies — and of a wider confrontation between Iran and the United States.",
+    "categories": [
+      "Iran",
+      "Strait of Hormuz",
+      "Oil",
+      "World"
+    ],
+    "published_at": "2026-11-24",
+    "sources": [
+      {
+        "name": "Reuters",
+        "url": "https://energynow.ca/2026/11/two-oil-tankers-catch-fire-after-striking-mines-in-strait-of-hormuz-irans-navy-says/"
+      },
+      {
+        "name": "The Business Standard",
+        "url": "https://www.tbsnews.net/worldbiz/middle-east/irgc-claims-three-oil-tankers-hit-naval-mines-strait-hormuz-1612351"
+      },
+      {
+        "name": "ANI",
+        "url": "https://www.devdiscourse.com/article/international/4011567-four-oil-tankers-explode-catch-fire-after-hitting-naval-mines-in-hormuz-irans-navy"
+      }
+    ]
+  },
+  {
     "slug": "icj-myanmar-rohingya-genocide-ruling",
     "title": "World Court Rules Myanmar Committed Genocide Against the Rohingya",
     "summary": "On November 19, 2026, the International Court of Justice ruled by nine votes to six that Myanmar committed genocide against the Rohingya Muslim minority in northern Rakhine State during the military's 2016-2017 \"clearance operations.\" It is the first time in the court's 80-year history that it has found a state responsible for genocide. The court found Myanmar's security forces killed thousands of civilians, committed widespread sexual violence and destroyed Rohingya villages, concluding the only reasonable inference was an intent to destroy a substantial part of the Rohingya population. Myanmar was ordered to pay reparations, investigate and prosecute those responsible, and allow the safe, voluntary return of the more than 700,000 Rohingya who fled to Bangladesh.",
@@ -92,6 +119,29 @@
       {
         "name": "The Business Standard",
         "url": "https://www.tbsnews.net/worldbiz/europe/nato-chief-vows-defend-against-space-threats-amid-reports-russian-nuclear-satellite"
+      }
+    ]
+  },
+  {
+    "slug": "huawei-convicted-us-criminal-trial-iran-trade-secrets",
+    "title": "Huawei Convicted on 10 of 12 Counts in US Criminal Trial Over Iran Business and Trade Secrets",
+    "summary": "A federal jury in Brooklyn convicted Huawei on Tuesday of 10 of the 12 criminal counts it faced, including bank fraud, wire fraud, sanctions violations and conspiracy to steal trade secrets from American companies. Prosecutors said the company misled banks about its business in Iran and took technology from rivals including Cisco and T-Mobile over two decades. The jury acquitted Huawei of the two most sweeping charges — racketeering conspiracy and conspiracy to obstruct justice — and the company said it expects to appeal. Sentencing is set for September 14, 2027.",
+    "why": "The verdict closes an eight-year US prosecution of one of China's biggest technology companies and sets a precedent for how American courts treat foreign corporations accused of sanctions evasion and trade-secret theft — while the acquittal on the racketeering charge limits the penalties Huawei faces.",
+    "categories": [
+      "Huawei",
+      "China",
+      "Technology",
+      "World"
+    ],
+    "published_at": "2026-11-24",
+    "sources": [
+      {
+        "name": "BusinessWorld (Reuters)",
+        "url": "https://bworldonline.com/technology/2026/11/25/796629/chinas-huawei-convicted-in-sprawling-us-criminal-trial-over-iran-business/"
+      },
+      {
+        "name": "Bloomberg Law",
+        "url": "https://news.bloomberglaw.com/tech-and-telecom-law/huawei-found-guilty-of-us-criminal-charges-in-landmark-case-2"
       }
     ]
   }
