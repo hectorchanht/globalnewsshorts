@@ -1,5 +1,27 @@
 [
   {
+    "slug": "russia-rosstat-leak-490000-war-dead",
+    "title": "Leaked Russian Statistics Put War Dead in Ukraine at Nearly 500,000",
+    "summary": "At least 490,334 Russian soldiers have died since the full-scale invasion of Ukraine began in February 2022, according to leaked death records from Russia's state statistics agency, Rosstat, analysed by the BBC. The records — more than 11 million death registrations from 2021 to September 2026, obtained in a hack by the Belarusian group Cyber Partisans and Ukraine's Silent Crow — were cross-checked against the BBC and Mediazona's named list of confirmed deaths, matching 90% of the records. Rosstat admitted a cyber-attack but denied any protected data had leaked, and Moscow has not published an official death toll since September 2022, when it last named 5,937 dead. Meduza and Mediazona, analysing the same files, estimate the true toll exceeds 720,000 once soldiers still listed as missing are included.",
+    "why": "The leak gives the first data-based picture of the war's human cost drawn from Russia's own records — far above anything Moscow has acknowledged — and it shows the war has become the leading cause of death for young Russian men, reshaping how the conflict's scale is understood worldwide.",
+    "categories": [
+      "Russia",
+      "Ukraine",
+      "World"
+    ],
+    "published_at": "2026-11-25",
+    "sources": [
+      {
+        "name": "BBC News Russian",
+        "url": "https://bbcrussian.substack.com/p/russias-figures-show-almost-500000-deaths"
+      },
+      {
+        "name": "The Moscow Times",
+        "url": "https://www.europesays.com/russia/93564/"
+      }
+    ]
+  },
+  {
     "slug": "australia-solomon-islands-security-treaty",
     "title": "Solomon Islands Signs Security Treaty With Australia, Ruling Out Any Foreign Military Base",
     "summary": "The Solomon Islands signed a security treaty with Australia on Wednesday in Canberra, naming Australia its primary security partner and declaring it will never allow a foreign military base on its soil. Prime Ministers Matthew Wale and Anthony Albanese signed the pact days after reports that Honiara had told Beijing it would not renew its controversial 2022 security deal with China, which is due to expire in early 2027; Wale declined to confirm or deny those reports, citing a non-disclosure clause in the China treaty. The wide-ranging treaty also covers Australian investment in infrastructure, education and renewable energy, improved visa arrangements for Solomon Islanders, and consultation with Canberra on critical infrastructure.",
