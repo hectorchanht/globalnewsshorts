@@ -1,5 +1,28 @@
 [
   {
+    "slug": "shenzhou-24-first-foreign-astronaut-tiangong",
+    "title": "Pakistan's First Astronaut Boards China's Space Station on Shenzhou-24",
+    "summary": "China launched the Shenzhou-24 spacecraft on Wednesday, carrying Pakistani astronaut Muhammad Zeeshan Ali to the Tiangong space station — the first foreign astronaut ever to board it, and the first Pakistani to reach orbit. Ali, a 40-year-old Pakistan Air Force pilot flying as a payload specialist, launched alongside commander Tang Hongbo and flight engineer Wu Yi from the Jiuquan Satellite Launch Center, and the spacecraft docked with Tiangong about three and a half hours later. Ali will spend about a week aboard the station conducting experiments, including one on photosynthetic cyanobacteria, before returning to Earth aboard the Shenzhou-23 spacecraft. The mission is the first joint crewed flight of Chinese and foreign astronauts in China's space programme, following a February 2025 agreement between Beijing and Islamabad.",
+    "why": "Tiangong has been a Chinese-only station since it became fully operational in 2022, so opening it to a foreign crew member marks a new phase in China's space diplomacy — and makes Pakistan the latest country to join human spaceflight.",
+    "categories": [
+      "China",
+      "Pakistan",
+      "Space",
+      "World"
+    ],
+    "published_at": "2026-11-25",
+    "sources": [
+      {
+        "name": "Reuters",
+        "url": "https://wtbx.com/2026/11/24/chinas-shenzhou-24-space-flight-takes-off-with-pakistani-national-as-first-foreign-astronaut/"
+      },
+      {
+        "name": "Associated Press",
+        "url": "https://www.military.com/china-launches-shenzhou-24-spacecraft-carrying-2-chinese-and-1-pakistani-astronaut"
+      }
+    ]
+  },
+  {
     "slug": "russia-rosstat-leak-490000-war-dead",
     "title": "Leaked Russian Statistics Put War Dead in Ukraine at Nearly 500,000",
     "summary": "At least 490,334 Russian soldiers have died since the full-scale invasion of Ukraine began in February 2022, according to leaked death records from Russia's state statistics agency, Rosstat, analysed by the BBC. The records — more than 11 million death registrations from 2021 to September 2026, obtained in a hack by the Belarusian group Cyber Partisans and Ukraine's Silent Crow — were cross-checked against the BBC and Mediazona's named list of confirmed deaths, matching 90% of the records. Rosstat admitted a cyber-attack but denied any protected data had leaked, and Moscow has not published an official death toll since September 2022, when it last named 5,937 dead. Meduza and Mediazona, analysing the same files, estimate the true toll exceeds 720,000 once soldiers still listed as missing are included.",
