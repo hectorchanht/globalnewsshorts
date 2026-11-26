@@ -5,6 +5,7 @@
 <url><loc>https://globalnewsshorts.com/news/</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
 <url><loc>https://globalnewsshorts.com/about/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 <url><loc>https://globalnewsshorts.com/tags/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/news/two-italians-killed-drone-attack-kuwait/</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://globalnewsshorts.com/news/israel-threatens-displace-one-million-gazans-hamas-disarm/</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://globalnewsshorts.com/news/us-proposes-new-tariffs-14-trading-partners/</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://globalnewsshorts.com/news/shenzhou-24-first-foreign-astronaut-tiangong/</loc><lastmod>2026-11-25</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -46,6 +47,10 @@
 <url><loc>https://globalnewsshorts.com/tags/china/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/tags/astronaut/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/tags/space/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/kuwait/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/italy/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/middle-east/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/world/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/clips/fauci-pleads-the-fifth/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
 <video:video>
 <video:thumbnail_loc>https://globalnewsshorts.com/posters/fauci-pleads-the-fifth.jpg</video:thumbnail_loc>
@@ -107,6 +112,17 @@
 <video:title>Pakistan&#x27;s First Astronaut Boards China&#x27;s Space Station on Shenzhou-24</video:title>
 <video:description>China launched the Shenzhou-24 spacecraft on Wednesday, carrying Pakistani astronaut Muhammad Zeeshan Ali to the Tiangong space station — the first foreign astronaut ever to board it, and the first Pakistani in orbit. Ali, a 40-year-old Pakistan Air Force pilot flying as payload specialist, entered Tiangong with commander Tang Hongbo and flight engineer Wu Yi, and will spend about a week on board before returning on Shenzhou-23. Narrated summary by Global News Shorts, based on Reuters and Associated Press reporting.</video:description>
 <video:content_loc>https://globalnewsshorts.com/videos/shenzhou-24-first-foreign-astronaut-tiangong.mp4</video:content_loc>
+<video:duration>51</video:duration>
+<video:publication_date>2026-11-26</video:publication_date>
+<video:family_friendly>yes</video:family_friendly>
+<video:live>no</video:live>
+</video:video></url>
+<url><loc>https://globalnewsshorts.com/clips/two-italians-killed-drone-attack-kuwait/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
+<video:video>
+<video:thumbnail_loc>https://globalnewsshorts.com/posters/two-italians-killed-drone-attack-kuwait.jpg</video:thumbnail_loc>
+<video:title>Two Italians Killed in Drone Attack on Kuwait Air Defence Site as Iran Denies Role</video:title>
+<video:description>Two Italian technicians working for Rheinmetall Italia were killed in a drone attack on an air defence station in Kuwait on Thursday. Italy and Kuwait blame Iran, which denies involvement. Two other people were wounded. Narrated summary by Global News Shorts, based on Reuters and BBC reporting. File photo: Kuwait City skyline by Zairon, CC BY 4.0, via Wikimedia Commons.</video:description>
+<video:content_loc>https://globalnewsshorts.com/videos/two-italians-killed-drone-attack-kuwait.mp4</video:content_loc>
 <video:duration>51</video:duration>
 <video:publication_date>2026-11-26</video:publication_date>
 <video:family_friendly>yes</video:family_friendly>
