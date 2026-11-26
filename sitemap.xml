@@ -40,6 +40,12 @@
 <url><loc>https://globalnewsshorts.com/tags/election/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/tags/runoff/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/tags/latin-america/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/shenzhou-24/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/tiangong/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/pakistan/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/china/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/astronaut/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/space/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/clips/fauci-pleads-the-fifth/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
 <video:video>
 <video:thumbnail_loc>https://globalnewsshorts.com/posters/fauci-pleads-the-fifth.jpg</video:thumbnail_loc>
@@ -92,6 +98,17 @@
 <video:content_loc>https://globalnewsshorts.com/videos/brazil-runoff-bolsonaro-lula.mp4</video:content_loc>
 <video:duration>75</video:duration>
 <video:publication_date>2026-10-06</video:publication_date>
+<video:family_friendly>yes</video:family_friendly>
+<video:live>no</video:live>
+</video:video></url>
+<url><loc>https://globalnewsshorts.com/clips/shenzhou-24-first-foreign-astronaut-tiangong/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
+<video:video>
+<video:thumbnail_loc>https://globalnewsshorts.com/posters/shenzhou-24-first-foreign-astronaut-tiangong.jpg</video:thumbnail_loc>
+<video:title>Pakistan&#x27;s First Astronaut Boards China&#x27;s Space Station on Shenzhou-24</video:title>
+<video:description>China launched the Shenzhou-24 spacecraft on Wednesday, carrying Pakistani astronaut Muhammad Zeeshan Ali to the Tiangong space station — the first foreign astronaut ever to board it, and the first Pakistani in orbit. Ali, a 40-year-old Pakistan Air Force pilot flying as payload specialist, entered Tiangong with commander Tang Hongbo and flight engineer Wu Yi, and will spend about a week on board before returning on Shenzhou-23. Narrated summary by Global News Shorts, based on Reuters and Associated Press reporting.</video:description>
+<video:content_loc>https://globalnewsshorts.com/videos/shenzhou-24-first-foreign-astronaut-tiangong.mp4</video:content_loc>
+<video:duration>51</video:duration>
+<video:publication_date>2026-11-26</video:publication_date>
 <video:family_friendly>yes</video:family_friendly>
 <video:live>no</video:live>
 </video:video></url>
