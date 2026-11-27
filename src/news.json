@@ -377,5 +377,35 @@
         "url": "https://en.globes.co.il/en/article-judges-propose-dropping-two-of-three-cases-against-netanyahu-1001564925"
       }
     ]
+  },
+  {
+    "slug": "houthi-strike-saudi-aramco-jazan-refinery-kills-worker",
+    "title": "Attack on Saudi Aramco's Jazan Refinery Kills One Worker, Halts Some Operations",
+    "summary": "A hostile aerial projectile struck Saudi Aramco's Jazan refinery in southwestern Saudi Arabia on Thursday, killing a Nepalese worker and wounding several others, Saudi Arabia's Energy Ministry said. The strike caused a fire that was later brought under control and temporarily halted some operations at the refinery, which can process up to 400,000 barrels of crude oil a day. The ministry did not name the attacker, but the Saudi-led coalition blamed Yemen's Iran-aligned Houthis and said it had destroyed a ballistic missile launch platform in the Yemeni port of Hodeidah that it said was used in the attack. The strike came a day after the Houthis claimed attacks on Ras Tanura, the kingdom's largest refinery, and the Red Sea ports of Jeddah and Jazan, and as oil prices climbed - Brent crude reached $97.30 a barrel on Friday, its highest since November 9.",
+    "why": "The attack is the latest escalation in fighting that reignited in July, and it shows the conflict reaching into the energy infrastructure the world economy depends on - with tanker attacks in the Strait of Hormuz also under way, the risk to global oil supplies is rising.",
+    "categories": [
+      "Houthis",
+      "Saudi Arabia",
+      "Yemen",
+      "Aramco",
+      "Oil",
+      "Middle East",
+      "World"
+    ],
+    "published_at": "2026-11-27",
+    "sources": [
+      {
+        "name": "Reuters",
+        "url": "https://www.devdiscourse.com/article/international/4012837-attack-on-saudi-aramcos-jazan-refinery-kills-worker-halts-some-operations?amp"
+      },
+      {
+        "name": "CNN",
+        "url": "https://live-ktvz.pantheonsite.io/news/national-world/cnn-world/2026/11/26/huge-plume-of-black-smoke-seen-from-space-after-houthis-claim-strike-on-saudis-biggest-oil-refinery/"
+      },
+      {
+        "name": "Reuters (via Kitco)",
+        "url": "https://www.kitco.com/news/off-the-wire/2026-11-27/oil-track-snap-three-week-losing-streak-over-supply-fears"
+      }
+    ]
   }
 ]
