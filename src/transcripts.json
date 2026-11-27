@@ -592,5 +592,52 @@
    "end": 55.04,
    "text": "so it can start on January 1st, 2028."
   }
+ ],
+ "congo-ebola-outbreak-passes-12000-cases": [
+  {
+   "start": 0.0,
+   "end": 6.0,
+   "text": "The Ebola outbreak in the Democratic Republic of Congo has now passed 12,000 confirmed cases."
+  },
+  {
+   "start": 6.0,
+   "end": 14.0,
+   "text": "Government data released on Thursday puts the total at 12,021 infections with 5,904 deaths."
+  },
+  {
+   "start": 14.0,
+   "end": 19.04,
+   "text": "The outbreak was declared in mid-May in a turi province in the northeast of the country"
+  },
+  {
+   "start": 19.04,
+   "end": 25.52,
+   "text": "and has since spread to eight of Congo's 26 provinces. It is caused by a rare strain of the virus"
+  },
+  {
+   "start": 25.52,
+   "end": 31.04,
+   "text": "called Bundibugyo for which there is no approved vaccine or treatment. Fighting between the army"
+  },
+  {
+   "start": 31.04,
+   "end": 36.4,
+   "text": "and rebels in the east is disrupting the response. Health workers have been evacuated from some"
+  },
+  {
+   "start": 36.4,
+   "end": 42.56,
+   "text": "areas and only about 15% of new cases are among known contacts of infected people,"
+  },
+  {
+   "start": 42.56,
+   "end": 48.0,
+   "text": "which means many chains of transmission are being missed. It is now the second largest Ebola"
+  },
+  {
+   "start": 48.0,
+   "end": 53.36,
+   "text": "outbreak on record, behind only the West African outbreak of 2014 to 2016."
+  }
  ]
 }
