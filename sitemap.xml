@@ -8,6 +8,7 @@
 <url><loc>https://globalnewsshorts.com/news/congo-ebola-outbreak-passes-12000-cases/</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://globalnewsshorts.com/news/eu-leaders-fail-agree-2028-2034-budget-ukraine-loan-stalled/</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://globalnewsshorts.com/news/houthi-strike-saudi-aramco-jazan-refinery-kills-worker/</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://globalnewsshorts.com/news/un-hunger-hotspots-16-famine-risk/</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://globalnewsshorts.com/news/two-italians-killed-drone-attack-kuwait/</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://globalnewsshorts.com/news/israel-threatens-displace-one-million-gazans-hamas-disarm/</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://globalnewsshorts.com/news/us-proposes-new-tariffs-14-trading-partners/</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -71,6 +72,12 @@
 <url><loc>https://globalnewsshorts.com/tags/yemen/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/tags/aramco/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/tags/oil/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/hunger/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/fao/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/wfp/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/el-niño/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/sudan/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://globalnewsshorts.com/tags/food-security/</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://globalnewsshorts.com/clips/fauci-pleads-the-fifth/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
 <video:video>
 <video:thumbnail_loc>https://globalnewsshorts.com/posters/fauci-pleads-the-fifth.jpg</video:thumbnail_loc>
@@ -188,6 +195,17 @@
 <video:description>A projectile struck Saudi Aramco&#x27;s Jazan refinery on Thursday, killing a Nepalese worker and halting some operations. The Saudi-led coalition blamed Yemen&#x27;s Houthis and said it destroyed the launch platform used in the attack. It came a day after the Houthis claimed strikes on Ras Tanura, the kingdom&#x27;s largest refinery. Narrated summary by Global News Shorts, based on Reuters and CNN reporting. File photo: a Saudi oil refinery in Jubail, by Suresh Babunair, CC BY 3.0, via Wikimedia Commons.</video:description>
 <video:content_loc>https://globalnewsshorts.com/videos/houthi-strike-saudi-aramco-jazan-refinery-kills-worker.mp4</video:content_loc>
 <video:duration>55</video:duration>
+<video:publication_date>2026-11-27</video:publication_date>
+<video:family_friendly>yes</video:family_friendly>
+<video:live>no</video:live>
+</video:video></url>
+<url><loc>https://globalnewsshorts.com/clips/un-hunger-hotspots-16-famine-risk/</loc><changefreq>monthly</changefreq><priority>0.8</priority>
+<video:video>
+<video:thumbnail_loc>https://globalnewsshorts.com/posters/un-hunger-hotspots-16-famine-risk.jpg</video:thumbnail_loc>
+<video:title>UN Warns Hunger Will Worsen in 16 Global Hotspots as El Niño and Conflict Collide</video:title>
+<video:description>The UN&#x27;s food agencies warn acute hunger will worsen in 16 hotspots from December to May 2027, up from 13 in June, driven by conflict and a strengthening El Niño, as funding for the worst-hit countries has fallen 62 percent since 2022. Narrated summary by Global News Shorts, based on WFP and Associated Press reporting. Photo: WFP/Gabriela Vivacqua.</video:description>
+<video:content_loc>https://globalnewsshorts.com/videos/un-hunger-hotspots-16-famine-risk.mp4</video:content_loc>
+<video:duration>60</video:duration>
 <video:publication_date>2026-11-27</video:publication_date>
 <video:family_friendly>yes</video:family_friendly>
 <video:live>no</video:live>

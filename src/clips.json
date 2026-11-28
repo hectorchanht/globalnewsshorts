@@ -115,5 +115,27 @@
       "Middle East",
       "World"
     ]
+  },
+  {
+    "slug": "un-hunger-hotspots-16-famine-risk",
+    "title": "UN Warns Hunger Will Worsen in 16 Global Hotspots as El Niño and Conflict Collide",
+    "hook": "Sixteen hunger hotspots — and famine is a risk in parts of Sudan.",
+    "description": "The UN's food agencies warn acute hunger will worsen in 16 hotspots from December to May 2027, up from 13 in June, driven by conflict and a strengthening El Niño, as funding for the worst-hit countries has fallen 62 percent since 2022. Narrated summary by Global News Shorts, based on WFP and Associated Press reporting. Photo: WFP/Gabriela Vivacqua.",
+    "src_file": "un_hunger_hotspots_16_famine_risk_gns.mp4",
+    "duration_s": 60,
+    "duration_iso": "PT1M0S",
+    "aspect": "9:16",
+    "upload_date": "2026-11-27",
+    "source": "Global News Shorts — based on WFP and Associated Press reporting. Photo: WFP/Gabriela Vivacqua.",
+    "tags": [
+      "Hunger",
+      "FAO",
+      "WFP",
+      "El Niño",
+      "Sudan",
+      "Yemen",
+      "Food Security",
+      "World"
+    ]
   }
 ]
